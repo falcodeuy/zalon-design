@@ -1,0 +1,31 @@
+/* Our Bulma theme */
+
+:root {
+  --bulma-text: #083766;
+  --bulma-link: #5271ff;
+  --bulma-primary: #083766;
+  --bulma-info: #5271ff;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    /* CSS Variables */
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* CSS Variables */
+  }
+}
+[data-theme='light'],
+.theme-light {
+  /* CSS Variables */
+}
+[data-theme='dark'],
+.theme-dark {
+  /* CSS Variables */
+}
+
+.navbar img {
+  max-height: 5rem;
+}
