@@ -8,9 +8,37 @@
 {% endblock %}
 
 {% block content %}
-  <div id="landing-page">
-    <header>
-      <div></div>
-    </header>
-  </div>
+  <section id="landing-page" class="section">
+    <div class="container">
+      {% for pack in packs %}
+        <div class="columns is-desktop">
+          <div class="column is-half">
+            <div class="card">
+              <div class="card-image">
+                <figure class="image is-4by3">
+                  <img src="{{ media_root }}{{ pack.banner.url }}" alt="Placeholder image" />
+                </figure>
+              </div>
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-content">
+                    <p class="title is-4">
+                      {{ pack.name }}: <span class="is-6 is-italic">${{ pack.price }}</span>
+                    </p>
+                    <p class="subtitle is-5">{{ pack.subtitle }}</p>
+                  </div>
+                </div>
+
+                <div class="content">
+                  {{ pack.description }}
+                  <br />
+                  <a href="{% url 'main:pack_detail' pack.id %}" class="button is-primary">View</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
 {% endblock %}
