@@ -5,6 +5,7 @@
   --bulma-link: #5271ff;
   --bulma-primary: #083766;
   --bulma-info: #5271ff;
+  --bulma-body-family: 'Inter', sans-serif;
 }
 
 @media (prefers-color-scheme: light) {

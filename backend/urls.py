@@ -24,3 +24,8 @@ urlpatterns = [
     path("", include("apps.main.urls", namespace="main")),
     path("__reload__/", include("django_browser_reload.urls")),
 ]
+
+
+admin.site.site_header = "Zalon Design Admin"
+admin.site.index_title = "Funcionalidades"
+admin.site.site_title = "Zalon Design Admin"
