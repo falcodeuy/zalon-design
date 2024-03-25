@@ -12,7 +12,6 @@ class Illustration(models.Model):
         verbose_name="Pack",
         related_name="illustrations",
         null=True,
-        blank=True,
     )
 
     class Meta:
@@ -37,6 +36,7 @@ class Pack(models.Model):
     price = models.DecimalField("Precio", max_digits=6, decimal_places=2)
     is_active = models.BooleanField("Activo", default=True)
     show_in_landing = models.BooleanField("Mostrar en landing", default=False)
+    banner = models.ImageField("Banner", upload_to="banners", null=True)
 
     def __str__(self):
         return self.name
