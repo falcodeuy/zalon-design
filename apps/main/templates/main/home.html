@@ -30,15 +30,63 @@
                 </div>
 
                 <div class="content">
-                  {{ pack.description }}
-                  <br />
-                  <a href="{% url 'main:pack_detail' pack.id %}" class="button is-primary">View</a>
+                  <div class="block">{{ pack.description }}</div>
+
+                  <div class="block">
+                    <a href="{% url 'main:pack_detail' pack.id %}" class="button is-primary">Ver pack</a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       {% endfor %}
+
+      <nav class="level is-mobile">
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Seguidores en redes</p>
+            <p class="title">3,456</p>
+          </div>
+        </div>
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Packs vendidos</p>
+            <p class="title">123</p>
+          </div>
+        </div>
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Emprendimientos usando Zalon</p>
+            <p class="title">456K</p>
+          </div>
+        </div>
+      </nav>
+
+      {% comment %}Reviews section{% endcomment %}
+      <div class="container">
+        <h1 class="title">Opiniones de quienes han usado nuestros packs</h1>
+        <div class="box">
+          <div class="media block">
+            <div class="media-left">
+              <figure class="image is-48x48">
+                <img src="https://bulma.io/assets/images/placeholders/96x96.png" alt="Placeholder image" />
+              </figure>
+            </div>
+            <div class="media-content">
+              <p class="title is-4">John Smith</p>
+              <p class="subtitle is-6">Barbería Cosito</p>
+            </div>
+          </div>
+
+          <div class="content">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris. <a>@bulmaio</a>. <a href="#">#css</a>
+            <a href="#">#responsive</a>
+            <br />
+            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 {% endblock %}
