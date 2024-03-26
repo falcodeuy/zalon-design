@@ -13,9 +13,8 @@ Plataforma de exposición y ventas de los packs de las líneas de Zalon Design. 
   - JavaScript (yep just vanilla JS)
   - CSS for styling (we're not using SASS as we don't want to compile anything)
     - [Bulma CSS Framework](https://bulma.io/): for general styling
-    - [Font Awesome](https://fontawesome.com/): for icons
+    - [Lineicons](https://lineicons.com/): for icons
     - [Animate.css](https://animate.style/): for animations
-    - [Hover.css](http://ianlunn.github.io/Hover/): for hover effects
 
 
 ## Run the project
