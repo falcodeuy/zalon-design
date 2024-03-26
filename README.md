@@ -5,13 +5,17 @@
 Plataforma de exposición y ventas de los packs de las líneas de Zalon Design. Con un backoffice para poder cargar packs y tener info de rendimiento.
 
 ## Tech stack
-- Django
-- Bulma CSS Framework
-
-### We're also using these other styling libraries for a more enjoyable experience
-- Font Awesome: for icons
-- Animate.css: for animations
-- Hover.css: for hover effects
+- **Backend:**
+  - [Django](https://www.djangoproject.com/)
+    - [Django CKEditor](https://django-ckeditor.readthedocs.io/): for rich text editing
+- **Frontend:**
+  - Django Templates
+  - JavaScript (yep just vanilla JS)
+  - CSS for styling (we're not using SASS as we don't want to compile anything)
+    - [Bulma CSS Framework](https://bulma.io/): for general styling
+    - [Font Awesome](https://fontawesome.com/): for icons
+    - [Animate.css](https://animate.style/): for animations
+    - [Hover.css](http://ianlunn.github.io/Hover/): for hover effects
 
 
 ## Run the project
