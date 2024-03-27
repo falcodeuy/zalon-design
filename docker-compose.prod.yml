@@ -20,7 +20,7 @@ services:
       timeout: 5s
       retries: 3
     networks:
-      - backend_network
+      - web_network
 
   web:
     build:
@@ -28,7 +28,7 @@ services:
       dockerfile: Dockerfile.prod # Use the specific Dockerfile for the build
     command: >
       sh -c "python manage.py migrate && python manage.py collectstatic
-      --no-input && gunicorn backend.wsgi:application -b 0.0.0.0:8000"
+      --no-input && gunicorn web.wsgi:application -b 0.0.0.0:8000"
     volumes:
       - .:/code
     environment:
@@ -47,7 +47,7 @@ services:
     image: nginx:latest
     restart: always
     volumes:
-      - ./backend_nginx.staging.conf:/etc/nginx/conf.d/default.conf
+      - ./web_nginx.staging.conf:/etc/nginx/conf.d/default.conf
       - ./static:/code/static
     ports:
       - '80:80'
