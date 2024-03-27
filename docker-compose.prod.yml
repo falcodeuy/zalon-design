@@ -47,7 +47,7 @@ services:
     image: nginx:latest
     restart: always
     volumes:
-      - ./web_nginx.staging.conf:/etc/nginx/conf.d/default.conf
+      - ./web_nginx.prod.conf:/etc/nginx/conf.d/default.conf
       - ./static:/code/static
     ports:
       - '80:80'
