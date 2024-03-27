@@ -1,4 +1,3 @@
-{% load django_browser_reload %}
 {% load static %}
 
 <!DOCTYPE html>
@@ -10,62 +9,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     {% comment %}Bulma CSS{% endcomment %}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     {% comment %}Google Fonts{% endcomment %}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
 
     {% comment %}Lineicons{% endcomment %}
     <link rel="stylesheet" href="https://cdn.lineicons.com/4.0/lineicons.css" />
 
     {% comment %}Animate.css{% endcomment %}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
 
     {% comment %}Our general styling{% endcomment %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
 
-    {% block extra_head %}
-
-    {% endblock %}
+    {% block extra_head %} {% endblock %}
   </head>
 
-  {% comment %} TODO: we're forcing light theme here. We have to fix the dark mode variables and remove this data-theme param {% endcomment %}
-  <body data-theme="light"> 
+  {% comment %} TODO: we're forcing light theme here. We have to fix the dark
+  mode variables and remove this data-theme param {% endcomment %}
+  <body data-theme="light">
     {% block header %}
-      <header>
-        <nav id="navbar" class="navbar is-justify-content-center" role="navigation" aria-label="main navigation">
-          <div class="navbar-brand">
-            <a class="navbar-item is-hidden-desktop" href="/"><img src="{% static '/img/zalon_design_logo.png' %}" alt="Logo" /></a>
+    <header>
+      <nav
+        id="navbar"
+        class="navbar is-justify-content-center"
+        role="navigation"
+        aria-label="main navigation"
+      >
+        <div class="navbar-brand">
+          <a class="navbar-item is-hidden-desktop" href="/"
+            ><img src="{% static '/img/zalon_design_logo.png' %}" alt="Logo"
+          /></a>
 
-            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar-zalon">
-              <span aria-hidden="true"></span>
-              <span aria-hidden="true"></span>
-              <span aria-hidden="true"></span>
-              <span aria-hidden="true"></span>
-            </a>
+          <a
+            role="button"
+            class="navbar-burger"
+            aria-label="menu"
+            aria-expanded="false"
+            data-target="navbar-zalon"
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+        <div id="navbar-zalon" class="navbar-menu is-flex-grow-0">
+          <div class="navbar">
+            <a class="navbar-item">Cómo funciona</a>
+            <a class="navbar-item is-hidden-touch" href="/"
+              ><img src="{% static '/img/zalon_design_logo.png' %}" alt="Logo"
+            /></a>
+            <a class="navbar-item">Packs disponibles</a>
           </div>
-          <div id="navbar-zalon" class="navbar-menu is-flex-grow-0">
-            <div class="navbar">
-              <a class="navbar-item">Cómo funciona</a>
-              <a class="navbar-item is-hidden-touch" href="/"><img src="{% static '/img/zalon_design_logo.png' %}" alt="Logo" /></a>
-              <a class="navbar-item">Packs disponibles</a>
-            </div>
-          </div>
-        </nav>
-      </header>
-    {% endblock %}
-
-    {% block content %}
-
-    {% endblock %}
+        </div>
+      </nav>
+    </header>
+    {% endblock %} {% block content %} {% endblock %}
 
     <footer class="footer">
       <div class="content has-text-centered">
         <p>
-          <strong>Zalon Design 2024</strong> by <a href="http://zalon.app">Zalon</a> + <a href="http://falcode.dev">Falcode</a>. This is open sourced for you <a href="https://github.com/falcodeuy/zalon-design/">here</a> 💜
+          <strong>Zalon Design 2024</strong> by
+          <a href="http://zalon.app">Zalon</a> +
+          <a href="http://falcode.dev">Falcode</a>. This is open sourced for you
+          <a href="https://github.com/falcodeuy/zalon-design/">here</a> 💜
         </p>
       </div>
     </footer>
@@ -77,14 +98,14 @@
           document.querySelectorAll('.navbar-burger'),
           0
         );
-      
+
         // Add a click event on each of them
         $navbarBurgers.forEach(el => {
           el.addEventListener('click', () => {
             // Get the target from the "data-target" attribute
             const target = el.dataset.target;
             const $target = document.getElementById(target);
-      
+
             // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
             el.classList.toggle('is-active');
             $target.classList.toggle('is-active');
