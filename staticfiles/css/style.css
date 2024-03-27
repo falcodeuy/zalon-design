@@ -30,3 +30,17 @@
 .navbar img {
   max-height: 5rem;
 }
+
+/* Hover effects */
+
+.slightly-rotate-hover {
+  transform: rotate(0);
+  scale: 1;
+  box-shadow: none;
+  transition: all 1s ease;
+}
+.slightly-rotate-hover:hover {
+  transform: rotate(0.3deg);
+  scale: 1.01;
+  box-shadow: grey 10px 10px 20px;
+}

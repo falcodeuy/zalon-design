@@ -8,85 +8,93 @@
 {% endblock %}
 
 {% block content %}
-  <section id="landing-page" class="section">
-    <div class="container">
-      {% for pack in packs %}
-        <div class="columns is-desktop">
-          <div class="column is-half">
-            <div class="card">
-              <div class="card-image">
-                <figure class="image is-4by3">
-                  <img src="{{ media_root }}{{ pack.banner.url }}" alt="Placeholder image" />
+  <div id="landing-page">
+    <section class="section">
+      <div class="container">
+        <h1 class="title has-text-centered">Paks disponibles</h1>
+        <h3 class="subtitle has-text-centered">¡No esperes más para hacer despegar tu negocio!</h3>
+
+        {% for pack in packs %}
+          <div class="columns is-desktop">
+            <div class="column is-half">
+              <div class="box card slightly-rotate-hover">
+                <div class="card-image">
+                  <figure class="image is-4by3">
+                    <img src="{{ media_root }}{{ pack.banner.url }}" alt="Placeholder image" />
+                  </figure>
+                  <div class="price-tag">${{ pack.price }}</div>
+                </div>
+                <div class="card-content">
+                  <div class="media">
+                    <div class="media-content">
+                      <p class="title block">{{ pack.name }}</p>
+                      <p class="subtitle block">{{ pack.subtitle }}</p>
+                    </div>
+                  </div>
+
+                  <div class="content">
+                    <div class="block">{{ pack.description }}</div>
+
+                    <div class="block">
+                      <a href="{% url 'main:pack_detail' pack.id %}" class="button is-primary">Ver pack</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+
+        <nav class="level is-mobile mt-6 mb-6">
+          <div class="level-item has-text-centered">
+            <div>
+              <i class="lni lni-users level-icon"></i>
+              <p class="heading">Seguidores en redes</p>
+              <p class="title">3,456</p>
+            </div>
+          </div>
+          <div class="level-item has-text-centered">
+            <div>
+              <i class="lni lni-rocket level-icon"></i>
+              <p class="heading">Packs vendidos</p>
+              <p class="title">123</p>
+            </div>
+          </div>
+          <div class="level-item has-text-centered is-hidden-mobile">
+            <div>
+              <i class="lni lni-heart level-icon"></i>
+              <p class="heading">Emprendimientos usando Zalon</p>
+              <p class="title">456K</p>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </section>
+
+    {% comment %}Reviews section{% endcomment %}
+    <section id="reviews-section">
+      <h1 class="title has-text-centered">Qué opinan quienes han usado nuestros packs</h1>
+
+      <div class="reviews-container is-flex">
+        {% for review in customer_reviews %}
+          <div class="box review">
+            <div class="media block">
+              <div class="media-left">
+                <figure class="image is-64x64">
+                  <img class="is-rounded" src="{{ media_root }}{{ review.image.url }}" alt="{{ review.name }}" />
                 </figure>
               </div>
-              <div class="card-content">
-                <div class="media">
-                  <div class="media-content">
-                    <p class="title is-4">
-                      {{ pack.name }}: <span class="is-6 is-italic">${{ pack.price }}</span>
-                    </p>
-                    <p class="subtitle is-5">{{ pack.subtitle }}</p>
-                  </div>
-                </div>
-
-                <div class="content">
-                  <div class="block">{{ pack.description }}</div>
-
-                  <div class="block">
-                    <a href="{% url 'main:pack_detail' pack.id %}" class="button is-primary">Ver pack</a>
-                  </div>
-                </div>
+              <div class="media-content">
+                <p class="title">{{ review.name }}</p>
+                <p class="subtitle">{{ review.business }}</p>
               </div>
             </div>
-          </div>
-        </div>
-      {% endfor %}
-
-      <nav class="level is-mobile">
-        <div class="level-item has-text-centered">
-          <div>
-            <p class="heading">Seguidores en redes</p>
-            <p class="title">3,456</p>
-          </div>
-        </div>
-        <div class="level-item has-text-centered">
-          <div>
-            <p class="heading">Packs vendidos</p>
-            <p class="title">123</p>
-          </div>
-        </div>
-        <div class="level-item has-text-centered">
-          <div>
-            <p class="heading">Emprendimientos usando Zalon</p>
-            <p class="title">456K</p>
-          </div>
-        </div>
-      </nav>
-
-      {% comment %}Reviews section{% endcomment %}
-      <div class="container">
-        <h1 class="title">Opiniones de quienes han usado nuestros packs</h1>
-        <div class="box">
-          <div class="media block">
-            <div class="media-left">
-              <figure class="image is-48x48">
-                <img src="https://bulma.io/assets/images/placeholders/96x96.png" alt="Placeholder image" />
-              </figure>
-            </div>
-            <div class="media-content">
-              <p class="title is-4">John Smith</p>
-              <p class="subtitle is-6">Barbería Cosito</p>
+            <div class="content">
+              <p>{{ review.review }}</p>
             </div>
           </div>
-
-          <div class="content">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris. <a>@bulmaio</a>. <a href="#">#css</a>
-            <a href="#">#responsive</a>
-            <br />
-            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-          </div>
-        </div>
+        {% endfor %}
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 {% endblock %}

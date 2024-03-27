@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
 
-from .models import Pack, Illustration
+from .models import Pack, Illustration, CustomerReview
 
 
 @admin.register(Pack)
@@ -49,3 +49,17 @@ class PackAdmin(admin.ModelAdmin):
         )
 
     image_tag.short_description = "banner"
+
+
+@admin.register(CustomerReview)
+class CustomerReviewAdmin(admin.ModelAdmin):
+    list_display = ("name", "business", "pack", "image_tag")
+    search_fields = ("name", "business", "review")
+    ordering = ("name", "business")
+
+    def image_tag(self, obj):
+        return format_html(
+            '<img src="{}" width="48" height="48" />'.format(obj.image.url)
+        )
+
+    image_tag.short_description = "imagen"

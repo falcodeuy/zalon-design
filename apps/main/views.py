@@ -1,11 +1,12 @@
 from django.shortcuts import render
 
-from .models import Pack
+from .models import Pack, CustomerReview
 
 
 def home(request):
     packs = Pack.objects.filter(is_active=True, show_in_landing=True)
-    context = {"packs": packs}
+    customer_reviews = CustomerReview.objects.all()[:25]
+    context = {"packs": packs, "customer_reviews": customer_reviews}
 
     return render(request, "main/home.html", context)
 

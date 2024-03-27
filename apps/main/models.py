@@ -40,3 +40,20 @@ class Pack(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class CustomerReview(models.Model):
+    name = models.CharField("Nombre", max_length=100)
+    business = models.CharField("Empresa", max_length=100)
+    review = models.TextField("Reseña")
+    image = models.ImageField("Imagen", upload_to="reviews", null=True)
+    pack = models.ForeignKey(
+        "Pack",
+        on_delete=models.CASCADE,
+        verbose_name="Pack",
+        related_name="reviews",
+        null=True,
+    )
+
+    def __str__(self):
+        return self.name
