@@ -32,7 +32,8 @@
     {% endblock %}
   </head>
 
-  <body>
+  {% comment %} TODO: we're forcing light theme here. We have to fix the dark mode variables and remove this data-theme param {% endcomment %}
+  <body data-theme="light"> 
     {% block header %}
       <header>
         <nav id="navbar" class="navbar is-justify-content-center" role="navigation" aria-label="main navigation">
