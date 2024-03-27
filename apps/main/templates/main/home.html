@@ -11,13 +11,13 @@
   <div id="landing-page">
     <section class="section">
       <div class="container">
-        <h1 class="title has-text-centered">Paks disponibles</h1>
+        <h1 class="title has-text-centered">Packs disponibles</h1>
         <h3 class="subtitle has-text-centered">¡No esperes más para hacer despegar tu negocio!</h3>
 
+        <div class="columns is-desktop">
         {% for pack in packs %}
-          <div class="columns is-desktop">
             <div class="column is-half">
-              <div class="box card slightly-rotate-hover">
+              <div class="box card slightly-rotate-hover pack-card">
                 <div class="card-image">
                   <figure class="image is-4by3">
                     <img src="{{ media_root }}{{ pack.banner.url }}" alt="Placeholder image" />
@@ -41,9 +41,9 @@
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
+            </div>    
         {% endfor %}
+        </div>
 
         <nav class="level is-mobile mt-6 mb-6">
           <div class="level-item has-text-centered">

@@ -8,6 +8,11 @@
   font-size: 2.2em;
 }
 
+.pack-card {
+  max-width: 450px;
+  margin: auto;
+}
+
 .price-tag {
   width: 125px;
   float: right;
