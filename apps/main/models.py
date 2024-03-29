@@ -53,6 +53,7 @@ class CustomerReview(models.Model):
         verbose_name="Pack",
         related_name="reviews",
         null=True,
+        blank=True,
     )
 
     def __str__(self):
