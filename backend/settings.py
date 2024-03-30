@@ -309,8 +309,12 @@ BULMA_SETTINGS = {
         "bulma-calendar",
     ],
     "variables": {
-        "primary": "#000000",
+        "primary": "#083766",
         "size-1": "6rem",
+        "link": "#5271ff",
+        "info": "#5271ff",
+        "body-family": "'Inter', sans-serif",
+        "background": "#e7e6eb",
     },
     "alt_variables": {
         "primary": "#fff",

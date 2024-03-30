@@ -34,7 +34,7 @@ class Pack(models.Model):
     name = models.CharField("Nombre", max_length=100)
     subtitle = models.CharField("Subtítulo", max_length=100, null=True, blank=True)
     description = CKEditor5Field("Descripción")
-    price = models.DecimalField("Precio", max_digits=6, decimal_places=2)
+    price = models.DecimalField("Precio", max_digits=6, decimal_places=0)
     is_active = models.BooleanField("Activo", default=True)
     show_in_landing = models.BooleanField("Mostrar en landing", default=False)
     cover = models.ImageField("Carátula", upload_to="covers")

@@ -1,18 +1,7 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block extra_head %}
-  <style>
-    .container {
-      background-color: red;
-      padding: 32px;
-      border-radius: 16px;
-    }
-    @media (max-width: 1024px) {
-      .container {
-        padding: 8px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="{% static 'main/css/pack_detail.css' %}" />
 {% endblock %}
 
 {% block content %}
@@ -27,6 +16,7 @@
         <div class="column">
           <h1 class="title">{{ pack.name }}</h1>
           <p class="subtitle">{{ pack.subtitle }}</p>
+          <p class="price">${{ pack.price }}</p>
         </div>
       </div>
     </div>

@@ -1,0 +1,15 @@
+.container {
+  background-color: white;
+  padding: 32px;
+  border-radius: 16px;
+}
+@media (max-width: 1024px) {
+  .container {
+    padding: 8px;
+  }
+}
+
+.price {
+  font-size: 2.5em;
+  font-weight: 300;
+}
