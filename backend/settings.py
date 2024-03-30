@@ -32,6 +32,9 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 DEBUG = bool(os.environ.get("DEBUG", default=0))
 
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
+CORS_ALLOWED_ORIGINS = [
+    "https://design.zalon.app",
+]
 CSRF_TRUSTED_ORIGINS = [
     "https://design.zalon.app",
 ]
