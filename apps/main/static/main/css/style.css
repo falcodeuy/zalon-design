@@ -22,17 +22,13 @@
   background: linear-gradient(90deg, #6e56d9 0%, #ae9ef1 100%);
   border-radius: 3px 4px 4px 3px;
   border-left: 1px solid #6e56d9;
-
   /* This makes room for the triangle */
   margin-left: 19px;
-
   position: relative;
-
   color: white;
   font-weight: 300;
   font-size: 28px;
   line-height: 38px;
-
   padding: 0 5px 0 5px;
 }
 
@@ -67,10 +63,11 @@
   width: 100vw;
   overflow: visible;
   position: relative;
-  gap: 2em; /* Optional: Adds some space between the boxes */
-
+  gap: 2em;
+  /* Optional: Adds some space between the boxes */
   animation: horizontal-scroll 120s linear infinite;
 }
+
 /* Faster animation in mobile */
 @media (max-width: 1024px) {
   .reviews-container {
@@ -88,7 +85,8 @@
 }
 
 .review {
-  flex-shrink: 0; /* Prevents the boxes from shrinking */
+  flex-shrink: 0;
+  /* Prevents the boxes from shrinking */
   width: 400px;
   height: 220px;
 }

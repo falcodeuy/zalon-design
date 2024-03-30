@@ -12,9 +12,10 @@ Plataforma de exposición y ventas de los packs de las líneas de Zalon Design. 
   - Django Templates
   - JavaScript (yep just vanilla JS)
   - CSS for styling (we're not using SASS as we don't want to compile anything)
-    - [Bulma CSS Framework](https://bulma.io/): for general styling
+    - [Bulma CSS Framework](https://bulma.io/): for general styling - We use Bulma with the help of [django-simple-bulma](https://github.com/lemonsaurus/django-simple-bulma) (Better than django-bulma in our opinion)
     - [Lineicons](https://lineicons.com/): for icons
     - [Animate.css](https://animate.style/): for animations
+    - Some CSS files for custom styling. One for general rules directly in _staticfiles_ and another others in every app directory that needs it
 
 
 ## Run the project
