@@ -11,8 +11,8 @@ def home(request):
     return render(request, "main/home.html", context)
 
 
-def pack_detail(request, slug):
-    pack = Pack.objects.get(slug=slug)
+def pack_detail(request, id):
+    pack = Pack.objects.get(id=id)
     context = {"pack": pack}
 
     return render(request, "main/pack_detail.html", context)

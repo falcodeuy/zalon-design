@@ -5,9 +5,8 @@ app_name = "main"
 urlpatterns = [
     path("", views.home, name="home"),
     path(
-        "pack/<slug:slug>/",
+        "pack/<int:id>/",
         views.pack_detail,
         name="pack_detail",
-        kwargs={"slug": "slug"},
     ),
 ]

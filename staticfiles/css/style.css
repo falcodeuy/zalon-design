@@ -1,30 +1,26 @@
 /* Our Bulma theme */
 
+body {
+  --bulma-text: #083766;
+  --bulma-link: #5271ff;
+  --bulma-primary: #083766;
+  --bulma-info: #5271ff;
+  --bulma-body-family: 'Inter', sans-serif;
+  --bulma-background: #e7e6eb;
+}
+
 :root {
   --bulma-text: #083766;
   --bulma-link: #5271ff;
   --bulma-primary: #083766;
   --bulma-info: #5271ff;
   --bulma-body-family: 'Inter', sans-serif;
+  --bulma-background: #e7e6eb;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    /* CSS Variables */
-  }
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* CSS Variables */
-  }
-}
-[data-theme='light'],
-.theme-light {
-  /* CSS Variables */
-}
-[data-theme='dark'],
-.theme-dark {
-  /* CSS Variables */
+.button {
+  background-color: var(--bulma-primary);
+  /* color: white; */
 }
 
 .navbar img {
