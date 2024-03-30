@@ -1,11 +1,29 @@
+from typing import Any
 from django.contrib import admin
 from django.utils.html import format_html
 
 from .models import Pack, Illustration, CustomerReview
+from .forms import PackAdminForm
+
+
+@admin.register(Illustration)
+class IllustrationAdmin(admin.ModelAdmin):
+    list_display = ("pack", "image_tag")
+    search_fields = ("pack",)
+    ordering = ("pack",)
+
+    def image_tag(self, obj):
+        return format_html(
+            '<img src="{}" width="48" height="48" />'.format(obj.image.url)
+        )
+
+    image_tag.short_description = "ilustración"
 
 
 @admin.register(Pack)
 class PackAdmin(admin.ModelAdmin):
+    form = PackAdminForm
+
     list_display = (
         "name",
         "price",
@@ -15,21 +33,7 @@ class PackAdmin(admin.ModelAdmin):
     )
     list_filter = ("is_active", "show_in_landing")
     search_fields = ("name", "description")
-    ordering = ("name", "price")
-    fieldsets = (
-        (None, {"fields": ("name", "price")}),
-        (
-            "Contenido",
-            {
-                "fields": (
-                    "subtitle",
-                    "description",
-                    "cover",
-                )
-            },
-        ),
-        ("Flags", {"fields": ("is_active", "show_in_landing")}),
-    )
+    ordering = ("name",)
 
     class IllustrationInline(admin.TabularInline):
         model = Illustration
@@ -49,6 +53,10 @@ class PackAdmin(admin.ModelAdmin):
         )
 
     image_tag.short_description = "cover"
+
+    def save_related(self, request, form, formsets, change):
+        super().save_related(request, form, formsets, change)
+        form.save_illustrations(form.instance)
 
 
 @admin.register(CustomerReview)

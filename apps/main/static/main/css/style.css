@@ -65,11 +65,17 @@
 .reviews-container {
   display: flex;
   width: 100vw;
-  overflow: hidden;
+  overflow: visible;
   position: relative;
   gap: 2em; /* Optional: Adds some space between the boxes */
 
   animation: horizontal-scroll 120s linear infinite;
+}
+/* Faster animation in mobile */
+@media (max-width: 1024px) {
+  .reviews-container {
+    animation-duration: 30s;
+  }
 }
 
 @keyframes horizontal-scroll {
@@ -84,7 +90,7 @@
 .review {
   flex-shrink: 0; /* Prevents the boxes from shrinking */
   width: 400px;
-  height: 200px;
+  height: 220px;
 }
 
 @media (min-width: 1024px) {
