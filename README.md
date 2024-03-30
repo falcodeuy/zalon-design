@@ -7,7 +7,7 @@ Plataforma de exposición y ventas de los packs de las líneas de Zalon Design. 
 ## Tech stack
 - **Backend:**
   - [Django](https://www.djangoproject.com/)
-    - [Django CKEditor](https://django-ckeditor.readthedocs.io/): for rich text editing
+    - [Django CKEditor 5](https://pypi.org/project/django-ckeditor-5/): for rich text editing
 - **Frontend:**
   - Django Templates
   - JavaScript (yep just vanilla JS)

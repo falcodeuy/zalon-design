@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from PIL import Image
+from django_ckeditor_5.fields import CKEditor5Field
 
 
 class Illustration(models.Model):
@@ -32,11 +33,11 @@ class Illustration(models.Model):
 class Pack(models.Model):
     name = models.CharField("Nombre", max_length=100)
     subtitle = models.CharField("Subtítulo", max_length=100, null=True, blank=True)
-    description = models.TextField("Descripción")
+    description = CKEditor5Field("Descripción")
     price = models.DecimalField("Precio", max_digits=6, decimal_places=2)
     is_active = models.BooleanField("Activo", default=True)
     show_in_landing = models.BooleanField("Mostrar en landing", default=False)
-    banner = models.ImageField("Banner", upload_to="banners", null=True)
+    cover = models.ImageField("Carátula", upload_to="covers", null=True)
 
     def __str__(self):
         return self.name

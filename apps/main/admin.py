@@ -24,11 +24,11 @@ class PackAdmin(admin.ModelAdmin):
                 "fields": (
                     "subtitle",
                     "description",
-                    "banner",
+                    "cover",
                 )
             },
         ),
-        ("Banderas", {"fields": ("is_active", "show_in_landing")}),
+        ("Flags", {"fields": ("is_active", "show_in_landing")}),
     )
 
     class IllustrationInline(admin.TabularInline):
@@ -45,10 +45,10 @@ class PackAdmin(admin.ModelAdmin):
 
     def image_tag(self, obj):
         return format_html(
-            '<img src="{}" width="100" height="100" />'.format(obj.banner.url)
+            '<img src="{}" width="100" height="100" />'.format(obj.cover.url)
         )
 
-    image_tag.short_description = "banner"
+    image_tag.short_description = "cover"
 
 
 @admin.register(CustomerReview)
