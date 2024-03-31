@@ -12,7 +12,6 @@ class Illustration(models.Model):
         on_delete=models.CASCADE,
         verbose_name="Pack",
         related_name="illustrations",
-        null=True,
     )
 
     class Meta:
