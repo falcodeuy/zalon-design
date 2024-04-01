@@ -30,6 +30,7 @@ class PackAdminForm(forms.ModelForm):
         fields = (
             "name",
             "price",
+            "strikethrough_price",
             "subtitle",
             "description",
             "cover",

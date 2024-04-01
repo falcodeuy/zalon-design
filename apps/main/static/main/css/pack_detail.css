@@ -9,7 +9,15 @@
   }
 }
 
-.price {
-  font-size: 2.5em;
-  font-weight: 300;
+.icon {
+  margin: -5px;
+}
+.lni-star-fill {
+  color: #5271ff;
+}
+
+.payment-logo {
+  width: 60px;
+  margin-right: 8px;
+  vertical-align: middle;
 }

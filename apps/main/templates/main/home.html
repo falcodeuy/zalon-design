@@ -33,7 +33,7 @@
                   </div>
 
                   <div class="block">
-                    <div class="content">{{ pack.description }}</div>
+                    <div class="content">{{ pack.description|safe }}</div>
 
                     <div class="block">
                       <a href="{% url 'main:pack_detail' pack.id %}" class="button is-primary">Ver pack</a>
