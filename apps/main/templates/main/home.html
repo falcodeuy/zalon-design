@@ -25,19 +25,11 @@
                   <div class="price-tag">${{ pack.price }}</div>
                 </div>
                 <div class="card-content">
-                  <div class="media">
-                    <div class="media-content">
-                      <p class="title block">{{ pack.name }}</p>
-                      <p class="subtitle block">{{ pack.subtitle }}</p>
-                    </div>
-                  </div>
+                  <p class="title block">{{ pack.name }}</p>
+                  <p class="subtitle block">{{ pack.subtitle }}</p>
 
                   <div class="block">
-                    <div class="content">{{ pack.description|safe }}</div>
-
-                    <div class="block">
-                      <a href="{% url 'main:pack_detail' pack.id %}" class="button is-primary">Ver pack</a>
-                    </div>
+                    <a href="{% url 'main:pack_detail' pack.id %}" class="button is-primary is-rounded">Ver pack</a>
                   </div>
                 </div>
               </div>
@@ -45,7 +37,7 @@
           {% endfor %}
         </div>
 
-        <nav class="level is-mobile mt-6 mb-6">
+        <nav class="level is-mobile mt-6 mb-6 pt-6">
           <div class="level-item has-text-centered">
             <div>
               <i class="lni lni-users level-icon"></i>
@@ -62,7 +54,7 @@
           </div>
           <div class="level-item has-text-centered is-hidden-mobile">
             <div>
-              <i class="lni lni-heart level-icon"></i>
+              <i class="lni lni-bolt level-icon"></i>
               <p class="heading">Emprendimientos usando Zalon</p>
               <p class="title">456K</p>
             </div>

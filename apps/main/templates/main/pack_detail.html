@@ -7,7 +7,7 @@
 {% block content %}
   <section class="section">
     <div class="container">
-      <div class="columns block">
+      <div class="columns block border-bottom">
         <div class="column is-two-thirds-desktop">
           <figure class="image is-16by9">
             <img src="{{ pack.cover.url }}" alt="{{ pack.name }}" style="border-radius: 8px;" />
@@ -34,21 +34,16 @@
             <h5 class="subtitle is-2 price">${{ pack.price }}</h5>
           </div>
           <div class="block">
-            <a href="{% url 'main:pack_detail' pack.id %}" class="button is-primary is-rounded">Comprar ahora</a>
+            <a href="{% url 'main:pack_purchase' pack.id %}" class="button is-primary is-rounded">Comprar ahora</a>
           </div>
         </div>
       </div>
 
       <div class="block columns">
         <div class="column is-two-thirds-desktop border-right">
-          <div class="block border-bottom">
+          <div class="block pb-4">
             <h2 class="title is-4">Acerca del pack</h2>
             <div>{{ pack.description|safe }}</div>
-          </div>
-
-          <div class="block">
-            <h2>Opiniones</h2>
-            coso coso 💥
           </div>
         </div>
 
@@ -58,15 +53,31 @@
             <div class="block">
               <p>
                 Pagá con
-                <img src="{% static 'img/mercadopago.svg' %}" alt="Mercado Pago" width="120" style="vertical-align: middle; margin-left: 1rem;" />
+                <img src="{% static 'img/mercadopago.svg' %}" alt="Mercado Pago" width="120" style="vertical-align: middle; margin-left: 0.6rem;" />
               </p>
             </div>
-            <div class="block">
+            <div class="block pb-4">
               <p>Tarjetas de débito y crédito</p>
               <img src="{% static 'img/visa.svg' %}" alt="Visa" class="payment-logo" />
               <img src="{% static 'img/mastercard.svg' %}" alt="Mastercard" class="payment-logo" />
               <img src="{% static 'img/oca.png' %}" alt="Oca" width="100" class="payment-logo" />
               <img src="{% static 'img/diners.svg' %}" alt="Diners Club" class="payment-logo" />
+            </div>
+          </div>
+
+          <div class="block">
+            <h2 class="title is-4">Cómo funciona</h2>
+            <div class="block">
+              <h4 class="title is-5 mb-2"><i class="lni lni-cart-full instruction-icon"></i> Compra tu pack</h4>
+              <p>Con la seguridad de comprar con el respaldo de Mercado Pago</p>
+            </div>
+            <div class="block">
+              <h4 class="title is-5 mb-2"><i class="lni lni-envelope instruction-icon"></i> Abre tu correo</h4>
+              <p>Recibirás el Pack en tu correo electrónico con los links de acceso a los diseños</p>
+            </div>
+            <div class="block">
+              <h4 class="title is-5 mb-2"><i class="lni lni-star-half instruction-icon"></i> ¡Crea!</h4>
+              <p>Puedes publicar las imágenes directamente en tu perfil o editar los diseños</p>
             </div>
           </div>
         </div>

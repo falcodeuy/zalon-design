@@ -1,5 +1,5 @@
 #landing-page {
-  background: linear-gradient(30deg, #f7f5fd, #c5baef);
+  background: linear-gradient(30deg, #e7e6eb, #d3ccf0);
 }
 
 .level-icon {
@@ -14,7 +14,7 @@
 }
 
 .price-tag {
-  width: 125px;
+  width: 95px;
   float: right;
   transform: rotate(-3deg);
   top: -24px;
@@ -66,6 +66,8 @@
   gap: 2em;
   /* Optional: Adds some space between the boxes */
   animation: horizontal-scroll 120s linear infinite;
+  padding-top: 64px;
+  padding-bottom: 128px;
 }
 
 /* Faster animation in mobile */

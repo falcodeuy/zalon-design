@@ -19,5 +19,5 @@ body {
 .slightly-rotate-hover:hover {
   transform: rotate(0.3deg);
   scale: 1.01;
-  box-shadow: grey 10px 10px 20px;
+  box-shadow: grey 10px 10px 10px;
 }

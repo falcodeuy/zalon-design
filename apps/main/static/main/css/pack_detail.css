@@ -21,3 +21,18 @@
   margin-right: 8px;
   vertical-align: middle;
 }
+
+.border-right {
+  border-right: #e7e6eb 1px solid;
+}
+
+.border-bottom {
+  border-bottom: #e7e6eb 1px solid;
+}
+
+.instruction-icon {
+  margin-right: 8px;
+  color: #5271ff;
+  vertical-align: middle;
+  font-size: larger;
+}
