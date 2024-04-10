@@ -51,6 +51,8 @@ services:
       - ./static:/code/static
       - ./certbot/www:/var/www/certbot/:ro
       - ./certbot/conf/:/etc/nginx/ssl/:ro
+    environment:
+      - SERVER_NAME=${SERVER_NAME}
     ports:
       - '80:80'
       - 443:443
