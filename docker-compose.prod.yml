@@ -8,12 +8,8 @@ services:
       - zalon_design_volume:/var/lib/postgresql/data
     ports:
       - '5433:5432'
-    environment:
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_HOST=db
-      - POSTGRES_PORT=5432
+    env_file:
+      - .env
     healthcheck:
       test: ['CMD-SHELL', 'pg_isready -U postgres']
       interval: 10s
@@ -31,12 +27,8 @@ services:
       --no-input && gunicorn backend.wsgi:application -b 0.0.0.0:8000"
     volumes:
       - .:/code
-    environment:
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_HOST=db
-      - POSTGRES_PORT=5432
+    env_file:
+      - .env
     depends_on:
       db:
         condition: service_healthy
@@ -51,8 +43,8 @@ services:
       - ./static:/code/static
       - ./certbot/www:/var/www/certbot/:ro
       - ./certbot/conf/:/etc/nginx/ssl/:ro
-    environment:
-      - SERVER_NAME=${SERVER_NAME}
+    env_file:
+      - .env
 
     ports:
       - '80:80'
