@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 from .models import Pack, CustomerReview
+from .forms.pack_purchase import PackPurchaseForm
 
 
 def home(request):
@@ -18,5 +19,5 @@ def pack_detail(request, id):
 
 def pack_purchase(request, id):
     pack = Pack.objects.get(id=id)
-    context = {"pack": pack}
-    return render(request, "main/pack_purchase_form.html", context)
+    context = {"pack": pack, "form": PackPurchaseForm()}
+    return render(request, "main/pack_purchase.html", context)

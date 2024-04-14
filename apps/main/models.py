@@ -29,6 +29,20 @@ class Illustration(models.Model):
         return self.image.url
 
 
+class Customer(models.Model):
+    name = models.CharField("Nombre", max_length=100)
+    business = models.CharField("Empresa", max_length=100)
+    email = models.EmailField("Email")
+    phone = models.CharField("Teléfono", max_length=100)
+
+    class Meta:
+        verbose_name = _("Cliente")
+        verbose_name_plural = _("Clientes")
+
+    def __str__(self):
+        return f"{self.name} - {self.email}"
+
+
 class Pack(models.Model):
     name = models.CharField("Nombre", max_length=100)
     subtitle = models.CharField("Subtítulo", max_length=100, null=True, blank=True)
@@ -46,10 +60,14 @@ class Pack(models.Model):
 
 
 class CustomerReview(models.Model):
-    name = models.CharField("Nombre", max_length=100)
-    business = models.CharField("Empresa", max_length=100)
+    customer = models.ForeignKey(
+        "Customer",
+        on_delete=models.CASCADE,
+        verbose_name="Cliente",
+        related_name="reviews",
+    )
     review = models.TextField("Reseña")
-    image = models.ImageField("Imagen", upload_to="reviews", null=True)
+    image = models.ImageField("Imagen", upload_to="reviews", null=True, blank=True)
     pack = models.ForeignKey(
         "Pack",
         on_delete=models.CASCADE,
@@ -65,3 +83,21 @@ class CustomerReview(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class PackSale(models.Model):
+    pack = models.ForeignKey("Pack", on_delete=models.CASCADE, verbose_name="Pack")
+    customer = models.ForeignKey(
+        "Customer",
+        on_delete=models.CASCADE,
+        verbose_name="Cliente",
+        related_name="sales",
+    )
+    date = models.DateTimeField("Fecha", auto_now_add=True)
+
+    class Meta:
+        verbose_name = _("Venta")
+        verbose_name_plural = _("Ventas")
+
+    def __str__(self):
+        return f"{self.customer} - {self.pack} - {self.date}"

@@ -2,8 +2,8 @@ from typing import Any
 from django.contrib import admin
 from django.utils.html import format_html
 
-from .models import Pack, Illustration, CustomerReview
-from .forms import PackAdminForm
+from .models import Pack, Illustration, Customer, CustomerReview
+from .forms.admin import PackAdminForm
 
 
 @admin.register(Illustration)
@@ -61,9 +61,8 @@ class PackAdmin(admin.ModelAdmin):
 
 @admin.register(CustomerReview)
 class CustomerReviewAdmin(admin.ModelAdmin):
-    list_display = ("name", "business", "pack", "image_tag")
-    search_fields = ("name", "business", "review")
-    ordering = ("name", "business")
+    list_display = ("customer", "pack", "image_tag")
+    search_fields = ("customer", "review")
 
     def image_tag(self, obj):
         return format_html(
@@ -71,3 +70,10 @@ class CustomerReviewAdmin(admin.ModelAdmin):
         )
 
     image_tag.short_description = "imagen"
+
+
+@admin.register(Customer)
+class CustomerAdmin(admin.ModelAdmin):
+    list_display = ("name", "business", "email", "phone")
+    search_fields = ("name", "business", "email", "phone")
+    ordering = ("name", "business", "email", "phone")

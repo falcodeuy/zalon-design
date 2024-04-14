@@ -3,7 +3,7 @@ from django.core.validators import validate_image_file_extension
 from django.utils.translation import gettext as _
 
 
-from .models import Pack, Illustration
+from apps.main.models import Pack, Illustration
 
 
 class MultipleFileInput(forms.ClearableFileInput):
