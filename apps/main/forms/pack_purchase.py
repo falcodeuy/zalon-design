@@ -1,26 +1,63 @@
 from django import forms
 from django.utils.translation import gettext as _
 
-from apps.main.models import PackSale, Customer
+from apps.main.models import PackSale, Customer, Pack
 
 
 class PackPurchaseForm(forms.ModelForm):
-    name = forms.CharField(max_length=100)
-    business = forms.CharField(max_length=100)
-    email = forms.EmailField()
-    phone = forms.CharField(max_length=100)
+    name = forms.CharField(
+        max_length=100,
+        label=_("Nombre"),
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Introduce tu nombre y apellido",
+                "required": True,
+                "class": "input",
+            }
+        ),
+        required=True,
+    )
+    business = forms.CharField(
+        max_length=100,
+        label=_("Empresa"),
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Introduce el nombre de tu negocio",
+                "class": "input",
+            }
+        ),
+        required=False,
+    )
+    email = forms.EmailField(
+        label=_("Email"),
+        widget=forms.EmailInput(
+            attrs={
+                "placeholder": "La dirección a la que enviaremos tu compra",
+                "class": "input",
+            }
+        ),
+        required=True,
+    )
+    phone = forms.CharField(
+        max_length=100,
+        label=_("Teléfono"),
+        required=True,
+        widget=forms.TextInput(attrs={"class": "input"}),
+    )
 
     class Meta:
         model = PackSale
         fields = ("pack",)
 
-    def clean_email(self):
-        email = self.cleaned_data.get("email")
-        if Customer.objects.filter(email=email).exists():
-            raise forms.ValidationError("A customer with this email already exists.")
-        return email
+    def __init__(self, *args, **kwargs):
+        pack_id = kwargs.pop("pack_id")
+        super().__init__(*args, **kwargs)
+        # We set the initial value of the pack field to the pack_id passed as an argument from the view. And hide it
+        self.fields["pack"].initial = pack_id
+        self.fields["pack"].widget = forms.HiddenInput()
+        self.fields["pack"].label = ""
 
-    def save(self, commit=True):
+    def save(self):
         pack = self.cleaned_data.get("pack")
         name = self.cleaned_data.get("name")
         business = self.cleaned_data.get("business")

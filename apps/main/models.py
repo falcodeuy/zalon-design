@@ -93,11 +93,11 @@ class PackSale(models.Model):
         verbose_name="Cliente",
         related_name="sales",
     )
-    date = models.DateTimeField("Fecha", auto_now_add=True)
+    created_at = models.DateTimeField("Fecha", auto_now_add=True)
 
     class Meta:
         verbose_name = _("Venta")
         verbose_name_plural = _("Ventas")
 
     def __str__(self):
-        return f"{self.customer} - {self.pack} - {self.date}"
+        return f"{self.customer} - {self.pack} - {self.created_at}"
