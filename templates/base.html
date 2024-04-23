@@ -40,18 +40,20 @@
           <div class="navbar-brand">
             <a class="navbar-item is-hidden-desktop" href="/"><img src="{% static '/img/zalon_design_logo.png' %}" alt="Logo" /></a>
 
-            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar-zalon">
+            {% comment %}Menu button for mobile hidden for now{% endcomment %}
+            {% comment %} <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar-zalon">
               <span aria-hidden="true"></span>
               <span aria-hidden="true"></span>
               <span aria-hidden="true"></span>
               <span aria-hidden="true"></span>
-            </a>
+            </a> {% endcomment %}
           </div>
           <div id="navbar-zalon" class="navbar-menu is-flex-grow-0">
             <div class="navbar">
-              <a class="navbar-item">Cómo funciona</a>
+              {% comment %}Menu options hidden for now{% endcomment %}
+              {% comment %} <a class="navbar-item">Cómo funciona</a> {% endcomment %}
               <a class="navbar-item is-hidden-touch" href="/"><img src="{% static '/img/zalon_design_logo.png' %}" alt="Logo" /></a>
-              <a class="navbar-item">Packs disponibles</a>
+              {% comment %} <a class="navbar-item">Packs disponibles</a> {% endcomment %}
             </div>
           </div>
         </nav>
