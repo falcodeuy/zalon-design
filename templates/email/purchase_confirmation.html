@@ -25,17 +25,17 @@
     </style>
   </head>
   <body>
-    <p>Hola {customer.name},</p>
+    <p>Hola {{ customer.name }},</p>
     <p>¡Muchas gracias por tu compra del pack {pack.name}! Esperamos que te sea de gran valor para tu negocio.</p>
     <ul>
       <li>
-        <strong>ID de compra:</strong> #{pack_sale.id}
+        <strong>ID de compra:</strong> #{{ pack_sale.id }}
       </li>
       <li>
-        <strong>Pack:</strong> {pack.name}
+        <strong>Pack:</strong> {{ pack.name }}
       </li>
       <li>
-        <strong>Total pagado:</strong> ${pack.price}
+        <strong>Total pagado:</strong> ${{ pack.price }}
       </li>
     </ul>
     <p>
