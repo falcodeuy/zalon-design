@@ -12,6 +12,7 @@ def send_confirmation_email(pack_sale):
             "pack_sale": pack_sale,
             "customer": pack_sale.customer,
             "pack": pack_sale.pack,
+            "server_name": settings.SERVER_NAME,
         },
     )
 

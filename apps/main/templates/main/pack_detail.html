@@ -82,7 +82,7 @@
         <div class="columns is-multiline is-mobile">
           {% for illustration in pack.illustrations.all|slice:':8' %}
             <div class="column is-one-quarter-desktop is-half-mobile">
-              <figure class="image is-1by1">
+              <figure class="image is-1by1 lightly-rotate-hover">
                 <img src="{{ illustration.image.url }}" alt="{{ pack.id }}" style="border-radius: 8px" />
               </figure>
             </div>
