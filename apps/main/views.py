@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 
 from .models import Pack, CustomerReview
 from .forms.pack_purchase import PackPurchaseForm
+from .forms.customer_review import CustomerReviewForm
 
 
 def home(request):
@@ -31,3 +32,20 @@ def pack_purchase(request, pack_id):
         form = PackPurchaseForm(pack_id=pack_id)
     context = {"form": form}
     return render(request, "main/pack_purchase.html", context)
+
+
+def customer_review(request, pack_id, customer_id):
+    if request.method == "POST":
+        form = CustomerReviewForm(
+            request.POST, pack_id=pack_id, customer_id=customer_id
+        )
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect("/thanks/")
+        else:
+            return HttpResponseRedirect("/error/")
+
+    else:
+        form = CustomerReviewForm(pack_id=pack_id, customer_id=customer_id)
+    context = {"form": form}
+    return render(request, "main/review.html", context)

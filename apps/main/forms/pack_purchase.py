@@ -1,7 +1,9 @@
 from django import forms
 from django.utils.translation import gettext as _
 
-from apps.main.models import PackSale, Customer, Pack
+from apps.main.models import PackSale, Customer
+
+from apps.main.utils import send_confirmation_email
 
 
 class PackPurchaseForm(forms.ModelForm):
@@ -72,6 +74,6 @@ class PackPurchaseForm(forms.ModelForm):
                 "phone": phone,
             },
         )
-
         pack_sale = PackSale.objects.create(pack=pack, customer=customer)
+        send_confirmation_email(pack_sale)
         return pack_sale

@@ -67,7 +67,6 @@ class CustomerReview(models.Model):
         related_name="reviews",
     )
     review = models.TextField("Reseña")
-    image = models.ImageField("Imagen", upload_to="reviews", null=True, blank=True)
     pack = models.ForeignKey(
         "Pack",
         on_delete=models.CASCADE,

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confirmación de Compra</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(90deg, #6e56d9 0%, #ae9ef1 100%);
+      }
+      p {
+        margin-bottom: 1.5rem;
+      }
+      ul {
+        margin-bottom: 1.5rem;
+      }
+      li {
+        margin-bottom: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <p>Hola {customer.name},</p>
+    <p>¡Muchas gracias por tu compra del pack {pack.name}! Esperamos que te sea de gran valor para tu negocio.</p>
+    <ul>
+      <li>
+        <strong>ID de compra:</strong> #{pack_sale.id}
+      </li>
+      <li>
+        <strong>Pack:</strong> {pack.name}
+      </li>
+      <li>
+        <strong>Total pagado:</strong> ${pack.price}
+      </li>
+    </ul>
+    <p>
+      Si tienes alguna duda no dudes en contactarnos,<br />El equipo de Zalon Design
+    </p>
+  </body>
+</html>
