@@ -71,11 +71,13 @@
         {% for review in customer_reviews %}
           <div class="box review">
             <div class="media block">
-              <div class="media-left">
-                <figure class="image is-64x64">
-                  <img class="is-rounded" src="{{ media_root }}{{ review.customer.photo.url }}" alt="review" />
-                </figure>
-              </div>
+              {% if review.customer.photo %}
+                <div class="media-left">
+                  <figure class="image is-64x64">
+                    <img class="is-rounded" src="{{ media_root }}{{ review.customer.photo.url }}" alt="review" />
+                  </figure>
+                </div>
+              {% endif %}
               <div class="media-content">
                 <p class="is-size-4">{{ review.customer.name }}</p>
                 <p class="is-size-6">{{ review.customer.business }}</p>
