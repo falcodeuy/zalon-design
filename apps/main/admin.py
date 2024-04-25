@@ -80,6 +80,17 @@ class CustomerAdmin(admin.ModelAdmin):
     list_display = ("name", "business", "email", "phone")
     search_fields = ("name", "business", "email", "phone")
     ordering = ("name", "business", "email", "phone")
+    readonly_fields = ("photo_tag",)
+
+    def photo_tag(self, obj):
+        if obj.photo:
+            return format_html(
+                '<img src="{}" width="48" height="48" />'.format(obj.photo.url)
+            )
+        else:
+            return "Cliente sin foto"
+
+    photo_tag.short_description = "foto"
 
 
 @admin.register(PackSale)
