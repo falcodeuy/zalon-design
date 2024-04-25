@@ -81,7 +81,7 @@ class CustomerReview(models.Model):
         verbose_name_plural = _("Reseñas")
 
     def __str__(self):
-        return self.name
+        return f"{self.customer} - {self.pack}"
 
 
 class PackSale(models.Model):
