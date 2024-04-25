@@ -65,9 +65,12 @@ class CustomerReviewAdmin(admin.ModelAdmin):
     search_fields = ("customer", "review")
 
     def image_tag(self, obj):
-        return format_html(
-            '<img src="{}" width="48" height="48" />'.format(obj.image.url)
-        )
+        if obj.customer.photo:
+            return format_html(
+                '<img src="{}" width="48" height="48" />'.format(obj.customer.photo.url)
+            )
+        else:
+            return "Cliente sin foto"
 
     image_tag.short_description = "imagen"
 

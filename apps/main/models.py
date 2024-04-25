@@ -73,8 +73,6 @@ class CustomerReview(models.Model):
         on_delete=models.CASCADE,
         verbose_name="Pack",
         related_name="reviews",
-        null=True,
-        blank=True,
     )
 
     class Meta:
