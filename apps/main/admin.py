@@ -49,7 +49,7 @@ class PackAdmin(admin.ModelAdmin):
 
     def image_tag(self, obj):
         return format_html(
-            '<img src="{}" width="100" height="100" />'.format(obj.cover.url)
+            '<img src="{}" width="133" height="100" />'.format(obj.cover.url)
         )
 
     image_tag.short_description = "cover"
