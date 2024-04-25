@@ -78,12 +78,12 @@
         </div>
       </div>
       <div class="block mt-4">
-        <h2 class="title is-4">Ejemplos de diseños incluídos</h2>
+        <h2 class="title is-4">Algunos diseños incluídos</h2>
         <div class="columns is-multiline is-mobile">
           {% for illustration in pack.illustrations.all|slice:':8' %}
             <div class="column is-one-quarter-desktop is-half-mobile">
-              <figure class="image is-1by1 lightly-rotate-hover">
-                <img src="{{ illustration.image.url }}" alt="{{ pack.id }}" style="border-radius: 8px" />
+              <figure class="image is-1by1">
+                <img src="{{ illustration.image.url }}" alt="{{ pack.id }}" class="slightly-rotate-hover" style="border-radius: 8px" />
               </figure>
             </div>
           {% endfor %}
