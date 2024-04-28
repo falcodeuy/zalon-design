@@ -83,19 +83,19 @@ class CustomerReview(models.Model):
         return f"{self.customer} - {self.pack}"
 
 
-class PackSale(models.Model):
+class Order(models.Model):
     pack = models.ForeignKey("Pack", on_delete=models.CASCADE, verbose_name="Pack")
     customer = models.ForeignKey(
         "Customer",
         on_delete=models.CASCADE,
         verbose_name="Cliente",
-        related_name="sales",
+        related_name="orders",
     )
     created_at = models.DateTimeField("Fecha", auto_now_add=True)
 
     class Meta:
-        verbose_name = _("Venta")
-        verbose_name_plural = _("Ventas")
+        verbose_name = _("Orden")
+        verbose_name_plural = _("Órdenes")
 
     def __str__(self):
         return f"{self.customer} - {self.pack} - {self.created_at}"

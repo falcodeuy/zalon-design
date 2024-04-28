@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 
 from .models import Pack, CustomerReview
-from .forms.pack_purchase import PackPurchaseForm
+from .forms.order_form import OrderForm
 from .forms.customer_review import CustomerReviewForm
 
 
@@ -19,9 +19,9 @@ def pack_detail(request, id):
     return render(request, "main/pack_detail.html", context)
 
 
-def pack_purchase(request, pack_id):
+def order_form(request, pack_id):
     if request.method == "POST":
-        form = PackPurchaseForm(request.POST, pack_id=pack_id)
+        form = OrderForm(request.POST, pack_id=pack_id)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect("/thanks/")
@@ -29,9 +29,9 @@ def pack_purchase(request, pack_id):
             return HttpResponseRedirect("/error/")
 
     else:
-        form = PackPurchaseForm(pack_id=pack_id)
+        form = OrderForm(pack_id=pack_id)
     context = {"form": form}
-    return render(request, "main/pack_purchase.html", context)
+    return render(request, "main/order_form.html", context)
 
 
 def customer_review(request, pack_id, customer_id):

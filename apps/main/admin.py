@@ -2,7 +2,7 @@ from typing import Any
 from django.contrib import admin
 from django.utils.html import format_html
 
-from .models import Pack, Illustration, Customer, CustomerReview, PackSale
+from .models import Pack, Illustration, Customer, CustomerReview, Order
 from .forms.admin import PackAdminForm
 
 
@@ -93,8 +93,8 @@ class CustomerAdmin(admin.ModelAdmin):
     photo_tag.short_description = "foto"
 
 
-@admin.register(PackSale)
-class PackSaleAdmin(admin.ModelAdmin):
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
     list_display = ("customer", "pack", "created_at")
     search_fields = ("customer", "pack")
     ordering = ("customer", "pack", "created_at")

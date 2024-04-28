@@ -1,12 +1,12 @@
 from django import forms
 from django.utils.translation import gettext as _
 
-from apps.main.models import PackSale, Customer
+from apps.main.models import Order, Customer
 
 from apps.main.utils import send_confirmation_email
 
 
-class PackPurchaseForm(forms.ModelForm):
+class OrderForm(forms.ModelForm):
     name = forms.CharField(
         max_length=100,
         label=_("Nombre"),
@@ -48,7 +48,7 @@ class PackPurchaseForm(forms.ModelForm):
     )
 
     class Meta:
-        model = PackSale
+        model = Order
         fields = ("pack",)
 
     def __init__(self, *args, **kwargs):
@@ -74,6 +74,6 @@ class PackPurchaseForm(forms.ModelForm):
                 "phone": phone,
             },
         )
-        pack_sale = PackSale.objects.create(pack=pack, customer=customer)
-        send_confirmation_email(pack_sale)
-        return pack_sale
+        order = Order.objects.create(pack=pack, customer=customer)
+        send_confirmation_email(order)
+        return order
