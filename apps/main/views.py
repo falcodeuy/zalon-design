@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 
-from .models import Pack, CustomerReview
+from .models import Pack, CustomerReview, Order
 from .forms.order_form import OrderForm
 from .forms.customer_review import CustomerReviewForm
 
@@ -23,8 +23,8 @@ def order_form(request, pack_id):
     if request.method == "POST":
         form = OrderForm(request.POST, pack_id=pack_id)
         if form.is_valid():
-            form.save()
-            return HttpResponseRedirect("/thanks/")
+            order = form.save()
+            return HttpResponseRedirect(f"/thanks/?order={order.id}")
         else:
             return HttpResponseRedirect("/error/")
 
@@ -32,6 +32,13 @@ def order_form(request, pack_id):
         form = OrderForm(pack_id=pack_id)
     context = {"form": form}
     return render(request, "main/order_form.html", context)
+
+
+def thanks(request):
+    order_id = request.GET.get("order")
+    order = Order.objects.get(id=order_id)
+    context = {"order": order, "pack": order.pack, "customer": order.customer}
+    return render(request, "main/thanks.html", context)
 
 
 def customer_review(request, pack_id, customer_id):

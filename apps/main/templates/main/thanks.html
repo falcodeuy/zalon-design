@@ -1,0 +1,43 @@
+{% extends 'base.html' %} {% load static %} {% block extra_head %}
+  <link rel="stylesheet" href="{% static 'main/css/pack_detail.css' %}" />
+{% endblock %} {% block content %}
+  <section class="section base-wrapper">
+    <div class="container white-rounded-box">
+      <div class="block">
+        <h1 class="has-text-centered title">¡Muchas gracias por tu compra!</h1>
+      </div>
+
+      <div class="block has-text-centered">
+        <p>
+          {{ customer.name }}, estamos procesando tu pedido. En breve <b>recibirás un email a {{ customer.email }} con los detalles de tu compra</b>.
+          <br />
+          Allí encontrarás un PDF con instrucciones para usar tu pack, esperamos que le agregue mucho valor a tu negocio.
+        </p>
+      </div>
+
+      <div class="columns block is-centered">
+        <div class="column is-one-third">
+          <div class="card slightly-rotate-hover pack-card" style="border: #e7e6eb solid 1px;">
+            <div class="card-image">
+              <figure class="image is-4y3">
+                <a href="{% url 'main:pack_detail' pack.id %}"><img src="{{ media_root }}{{ pack.cover.url }}" alt="pack cover" /></a>
+              </figure>
+            </div>
+            <div class="card-content">
+              <p class="title block is-5">{{ pack.name }}</p>
+              <p class="subtitle block is-6">{{ pack.subtitle }}</p>
+              <div class="block">
+                <a href="{% url 'main:pack_detail' pack.id %}" class="button is-primary is-rounded">Ver pack</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="block has-text-centered mt-6">Si tienes algún problema no dudes en escribirnos y nos pondremos en contacto para poder ayudarte.</div>
+      <div class="block has-text-centered">
+        <a href="#" class="button is-primary is-rounded">Contacto</a>
+      </div>
+    </div>
+  </section>
+{% endblock %}
