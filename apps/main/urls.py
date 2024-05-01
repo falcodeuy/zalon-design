@@ -11,4 +11,5 @@ urlpatterns = [
         views.customer_review,
         name="customer_review",
     ),
+    path("thanks/", views.thanks, name="thanks"),
 ]
