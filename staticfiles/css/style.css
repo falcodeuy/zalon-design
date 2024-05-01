@@ -8,6 +8,24 @@ body {
   max-height: 5rem;
 }
 
+.base-wrapper {
+  min-height: calc(
+    100vh - 175px - 96px
+  ); /* 175px is the height of the footer and 96px is the height of the navbar */
+}
+
+.white-rounded-box {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+@media screen and (max-width: 768px) {
+  .white-rounded-box {
+    margin: -1.5rem;
+    padding: 1rem !important;
+  }
+}
+
 /* Hover effects */
 
 .slightly-rotate-hover {
