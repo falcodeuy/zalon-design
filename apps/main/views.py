@@ -11,7 +11,12 @@ def home(request):
         is_active=True,
     )
     customer_reviews = CustomerReview.objects.all()[:25]
-    context = {"packs": packs, "customer_reviews": customer_reviews}
+    orders_count = Order.objects.count()
+    context = {
+        "packs": packs,
+        "customer_reviews": customer_reviews,
+        "orders_count": orders_count,
+    }
     return render(request, "main/home.html", context)
 
 
