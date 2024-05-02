@@ -1,6 +1,10 @@
 {% extends 'base.html' %} {% load static %} {% block extra_head %}
   <link rel="stylesheet" href="{% static 'main/css/pack_detail.css' %}" />
-{% endblock %} {% block content %}
+{% endblock %}
+{% block title %}
+  Zalon Design - {{ pack.name }}
+{% endblock %}
+{% block content %}
   <section class="section base-wrapper">
     <div class="white-rounded-box container">
       <div class="columns block border-bottom">
