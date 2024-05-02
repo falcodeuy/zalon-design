@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+  <section class="section base-wrapper">
+    <div class="column has-text-centered">
+      <h1 class="title">Error 404</h1>
+      <p class="subtitle">Perdón, esta página no existe 😓</p>
+      <a href="{% url 'main:home' %}" class="button is-link is-rounded">Volver al inicio</a>
+    </div>
+  </section>
+{% endblock %}
