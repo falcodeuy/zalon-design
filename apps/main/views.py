@@ -1,5 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.conf import settings
+from django.contrib.auth.decorators import login_required
+from django.http import FileResponse, Http404
+import os
 
 from .models import Pack, CustomerReview, Order
 from .forms.order_form import OrderForm
@@ -63,3 +67,17 @@ def customer_review(request, pack_id, customer_id):
         form = CustomerReviewForm(pack_id=pack_id, customer_id=customer_id)
     context = {"form": form}
     return render(request, "main/review.html", context)
+
+
+@login_required
+def serve_protected_file(request, file_path):
+    """
+    View to serve protected files as we don't want to expose the media/instructinos folder to the public.
+    """
+    document = os.path.join(settings.MEDIA_ROOT, "instructions", file_path)
+    if os.path.exists(document):
+        return FileResponse(
+            open(document, "rb"), content_type="application/force-download"
+        )
+    else:
+        raise Http404("File does not exist")
