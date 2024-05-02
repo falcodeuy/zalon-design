@@ -28,22 +28,22 @@
   <body style="min-height: 100vh">
     <section class="section">
       <div class="container">
-        <img src="https://{{ server_name }}/static/img/zalon_design_logo.png" alt="Zalon Design Logo" />
-        <h1 class="title has-text-centered">¡Muchas gracias por tu compra!</h1>
-        <h3 class="subtitle has-text-centered">Hola, {{ customer.name }}, gracias por tu compra. Esperamos que le sea de gran valor a tu negocio.</h3>
+        <div class="block has-text-centered">
+          <img src="https://{{ server_name }}/static/img/zalon_design_logo.png" alt="Zalon Design Logo" width="250" />
+          <h1 class="title">¡Muchas gracias por tu compra!</h1>
+          <h3 class="subtitle">Hola, {{ customer.name }}, gracias por tu compra. Esperamos que le sea de gran valor a tu negocio.</h3>
+        </div>
 
-        <div class="box card">
-          <div class="card-image">
-            <figure class="image is-4y3">
-              <img src="https://{{ server_name }}/{{ pack.cover.url }}" alt="Placeholder image" />
-            </figure>
-            <div class="price-tag">${{ pack.price }}</div>
-          </div>
+        <div class="block box card">
           <div class="card-content">
             <p class="title block">Resumen de tu compra</p>
             <ul>
-              <li>Pack: {{ pack.name }}</li>
-              <li>Precio: ${{ pack.price }}</li>
+              <li>
+                Pack: <b>{{ pack.name }}</b>
+              </li>
+              <li>
+                Precio: <b>${{ pack.price }}</b>
+              </li>
             </ul>
             <div class="block">
               <a href="https://{{ server_name }}/pack/{{ pack.id }}/" class="button is-primary is-rounded">Ver página del pack</a>

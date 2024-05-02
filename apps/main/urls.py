@@ -12,4 +12,5 @@ urlpatterns = [
         name="customer_review",
     ),
     path("thanks/", views.thanks, name="thanks"),
+    path("error/", views.error, name="error"),
 ]

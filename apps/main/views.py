@@ -52,6 +52,10 @@ def thanks(request):
     return render(request, "main/thanks.html", context)
 
 
+def error(request):
+    return render(request, "main/error.html")
+
+
 def customer_review(request, pack_id, customer_id):
     if request.method == "POST":
         form = CustomerReviewForm(

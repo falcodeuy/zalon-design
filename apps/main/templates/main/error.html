@@ -1,0 +1,17 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+  <section class="section base-wrapper">
+    <div class="container white-rounded-box">
+      <div class="block">
+        <h1 class="has-text-centered title">Algo ha salido mal 😔</h1>
+      </div>
+
+      <div class="block has-text-centered">
+        <p>Vuelve a intentarlo o ponte en contacto con nosotros para que podamos ayudarte.</p>
+      </div>
+
+      <div class="block has-text-centered">
+        <a href="#" class="button is-link is-light is-rounded">Contacto</a> <a href="{% url 'main:home' %}" class="button is-primary is-rounded">Volver al inicio</a>
+      </div>
+    </div>
+  </section>
+{% endblock %}
