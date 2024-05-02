@@ -46,15 +46,18 @@ class Customer(models.Model):
 
 class Pack(models.Model):
     name = models.CharField("Nombre", max_length=100)
-    subtitle = models.CharField("Subtítulo", max_length=100, null=True, blank=True)
+    subtitle = models.CharField("Subtítulo", max_length=100)
     description = CKEditor5Field("Descripción")
     price = models.DecimalField("Precio", max_digits=6, decimal_places=0)
     strikethrough_price = models.DecimalField(
         "Precio tachado", max_digits=6, decimal_places=0, null=True, blank=True
     )
     is_active = models.BooleanField("Activo", default=True)
-    show_in_landing = models.BooleanField("Mostrar en landing", default=False)
     cover = models.ImageField("Carátula", upload_to="covers")
+    instructions_file = models.FileField(
+        "Archivo de instrucciones",
+        upload_to="instructions",
+    )
 
     def __str__(self):
         return self.name

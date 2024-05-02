@@ -28,10 +28,9 @@ class PackAdmin(admin.ModelAdmin):
         "name",
         "price",
         "is_active",
-        "show_in_landing",
         "image_tag",
     )
-    list_filter = ("is_active", "show_in_landing")
+    list_filter = ("is_active",)
     search_fields = ("name", "description")
     ordering = ("name",)
 

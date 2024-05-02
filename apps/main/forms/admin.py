@@ -35,7 +35,7 @@ class PackAdminForm(forms.ModelForm):
             "description",
             "cover",
             "is_active",
-            "show_in_landing",
+            "instructions_file",
         )
 
     illustrations = MultipleFileField(

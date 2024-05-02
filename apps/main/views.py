@@ -7,7 +7,9 @@ from .forms.customer_review import CustomerReviewForm
 
 
 def home(request):
-    packs = Pack.objects.filter(is_active=True, show_in_landing=True)
+    packs = Pack.objects.filter(
+        is_active=True,
+    )
     customer_reviews = CustomerReview.objects.all()[:25]
     context = {"packs": packs, "customer_reviews": customer_reviews}
     return render(request, "main/home.html", context)
