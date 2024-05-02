@@ -4,7 +4,7 @@ from django.core.mail import send_mail
 
 
 def send_confirmation_email(order):
-    subject = "Gracias por tu compra"
+    subject = f"Gracias por tu compra - #{order.id}"
     # Render HTML template
     html_message = render_to_string(
         "email/order_confirmation.html",

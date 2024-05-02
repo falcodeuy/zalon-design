@@ -28,14 +28,14 @@
   <body style="min-height: 100vh">
     <section class="section">
       <div class="container">
-        <img src="{{ server_name }}/static/img/zalon_design_logo.png" alt="Logo" />
+        <img src="https://{{ server_name }}/static/img/zalon_design_logo.png" alt="Zalon Design Logo" />
         <h1 class="title has-text-centered">¡Muchas gracias por tu compra!</h1>
         <h3 class="subtitle has-text-centered">Hola, {{ customer.name }}, gracias por tu compra. Esperamos que le sea de gran valor a tu negocio.</h3>
 
         <div class="box card">
           <div class="card-image">
             <figure class="image is-4y3">
-              <img src="{{ server_name }}/{{ pack.cover.url }}" alt="Placeholder image" />
+              <img src="https://{{ server_name }}/{{ pack.cover.url }}" alt="Placeholder image" />
             </figure>
             <div class="price-tag">${{ pack.price }}</div>
           </div>
@@ -46,7 +46,7 @@
               <li>Precio: ${{ pack.price }}</li>
             </ul>
             <div class="block">
-              <a href="{{ server_name }}/pack/{{ pack.id }}/" class="button is-primary is-rounded">Ver página del pack</a>
+              <a href="https://{{ server_name }}/pack/{{ pack.id }}/" class="button is-primary is-rounded">Ver página del pack</a>
             </div>
           </div>
         </div>
