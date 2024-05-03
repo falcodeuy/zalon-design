@@ -69,6 +69,7 @@ class PackAdmin(admin.ModelAdmin):
 class CustomerReviewAdmin(admin.ModelAdmin):
     list_display = ("customer", "pack", "image_tag")
     search_fields = ("customer", "review")
+    readonly_fields = ("customer", "pack", "review", "image_tag")
 
     def image_tag(self, obj):
         if obj.customer.photo:
@@ -101,9 +102,17 @@ class CustomerAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ("customer", "pack", "created_at")
+    list_display = ("customer", "pack", "is_reviewed", "created_at")
     search_fields = ("customer", "pack")
     ordering = ("customer", "pack", "created_at")
+    readonly_fields = ("customer", "pack", "created_at", "is_reviewed")
+
+    def send_email(self, request, queryset):
+        for order in queryset:
+            print(f"Enviando email a {order.customer.email}...")
+
+    send_email.short_description = "Pedir reseña por email"
+    actions = [send_email]
 
 
 @admin.register(ContactMsg)

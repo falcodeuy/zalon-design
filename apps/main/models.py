@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 from PIL import Image
 from apps.main.utils import send_confirmation_email
@@ -78,6 +79,12 @@ class CustomerReview(models.Model):
         verbose_name="Pack",
         related_name="reviews",
     )
+    score = models.PositiveSmallIntegerField(
+        "Puntuación",
+        validators=[MinValueValidator(1), MaxValueValidator(5)],
+        null=True,
+        blank=True,
+    )
 
     class Meta:
         verbose_name = _("Reseña")
@@ -96,6 +103,7 @@ class Order(models.Model):
         related_name="orders",
     )
     created_at = models.DateTimeField("Fecha", auto_now_add=True)
+    is_reviewed = models.BooleanField("Tiene reseña", default=False)
 
     class Meta:
         verbose_name = _("Orden")
