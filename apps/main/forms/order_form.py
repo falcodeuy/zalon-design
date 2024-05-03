@@ -40,8 +40,7 @@ class OrderForm(forms.ModelForm):
     phone = forms.CharField(
         max_length=100,
         label=_("Teléfono"),
-        required=True,
-        widget=forms.TextInput(attrs={"class": "input"}),
+        widget=forms.TextInput(attrs={"placeholder": "Opcional", "class": "input"}),
     )
 
     class Meta:

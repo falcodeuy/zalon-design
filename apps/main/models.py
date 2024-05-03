@@ -34,7 +34,7 @@ class Customer(models.Model):
     name = models.CharField("Nombre", max_length=100)
     business = models.CharField("Empresa", max_length=100)
     email = models.EmailField("Email")
-    phone = models.CharField("Teléfono", max_length=100)
+    phone = models.CharField("Teléfono", max_length=100, null=True, blank=True)
     photo = models.ImageField("Foto", upload_to="customers", null=True, blank=True)
 
     class Meta:
