@@ -1,8 +1,15 @@
 from typing import Any
 from django.contrib import admin
 from django.utils.html import format_html
-
-from .models import Pack, Illustration, Customer, CustomerReview, Order, Contact
+from .models import (
+    Pack,
+    Illustration,
+    Customer,
+    CustomerReview,
+    Order,
+    Contact,
+    Payment,
+)
 from .forms.admin import PackAdminForm
 
 
@@ -104,3 +111,21 @@ class ContactAdmin(admin.ModelAdmin):
     list_display = ("name", "email", "created_at")
     search_fields = ("name", "email")
     ordering = ("name", "email", "created_at")
+
+
+@admin.register(Payment)
+class PaymentAdmin(admin.ModelAdmin):
+    list_display = ("id", "order", "created_at", "last_modified", "amount")
+    search_fields = ("order__id",)
+    ordering = ("last_modified", "created_at")
+    readonly_fields = (
+        "order",
+        "created_at",
+        "last_modified",
+        "amount",
+        "payment_method",
+        "payment_type",
+        "payment_status",
+        "payment_id",
+        "payment_provider",
+    )

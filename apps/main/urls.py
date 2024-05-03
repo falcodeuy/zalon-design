@@ -11,6 +11,7 @@ urlpatterns = [
         views.customer_review,
         name="customer_review",
     ),
+    path("mp-notification", views.mp_notification, name="example_view"),
     path("thanks/", views.thanks, name="thanks"),
     path("error/", views.error, name="error"),
     path("contact/", views.contact, name="contact"),

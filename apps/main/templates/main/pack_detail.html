@@ -1,98 +1,144 @@
 {% extends 'base.html' %} {% load static %} {% block extra_head %}
-  <link rel="stylesheet" href="{% static 'main/css/pack_detail.css' %}" />
-{% endblock %}
-{% block title %}
-  Zalon Design - {{ pack.name }}
-{% endblock %}
+<link rel="stylesheet" href="{% static 'main/css/pack_detail.css' %}" />
+{% endblock %} {% block title %} Zalon Design - {{ pack.name }} {% endblock %}
 {% block content %}
-  <section class="section base-wrapper">
-    <div class="white-rounded-box container">
-      <div class="columns block border-bottom">
-        <div class="column is-two-thirds-desktop">
-          <figure class="image is-4by3">
-            <img src="{{ pack.cover.url }}" alt="{{ pack.name }}" style="border-radius: 8px" />
-          </figure>
-        </div>
-        <div class="column">
-          <div class="block">
-            <h1 class="title">{{ pack.name }}</h1>
-          </div>
-          <div class="block">
-            <span class="icon"><i class="lni lni-star-fill"></i></span>
-            <span class="icon"><i class="lni lni-star-fill"></i></span>
-            <span class="icon"><i class="lni lni-star-fill"></i></span>
-            <span class="icon"><i class="lni lni-star-fill"></i></span>
-            <span class="icon"><i class="lni lni-star-fill"></i></span>
-            {% if pack.strikethrough_price %}
-              <br />
-              <s class="has-text-grey-light"><small>${{ pack.strikethrough_price }}</small></s>
-            {% endif %}
-            <h5 class="subtitle is-2 price">${{ pack.price }}</h5>
-          </div>
-          <div class="block">
-            <p class="content">{{ pack.subtitle }}</p>
-          </div>
-          <div class="block">
-            <a href="{% url 'main:order_form' pack.id %}" class="button is-primary is-rounded">Comprar ahora</a>
-          </div>
-        </div>
+<section class="section base-wrapper">
+  <div class="white-rounded-box container">
+    <div class="columns block border-bottom">
+      <div class="column is-two-thirds-desktop">
+        <figure class="image is-4by3">
+          <img
+            src="{{ pack.cover.url }}"
+            alt="{{ pack.name }}"
+            style="border-radius: 8px"
+          />
+        </figure>
       </div>
-
-      <div class="block columns border-bottom">
-        <div class="column is-two-thirds-desktop border-right">
-          <div class="block pb-4">
-            <h2 class="title is-4">Acerca del pack</h2>
-            <div>{{ pack.description|safe }}</div>
-          </div>
+      <div class="column">
+        <div class="block">
+          <h1 class="title">{{ pack.name }}</h1>
         </div>
-
-        <div class="column">
-          <div class="block border-bottom">
-            <h2 class="title is-4">Medios de pago</h2>
-            <div class="block">
-              <p>
-                Pagá con
-                <img src="{% static 'img/mercadopago.svg' %}" alt="Mercado Pago" width="120" style="vertical-align: middle; margin-left: 0.6rem" />
-              </p>
-            </div>
-            <div class="block pb-4">
-              <p>Tarjetas de débito y crédito</p>
-              <img src="{% static 'img/visa.svg' %}" alt="Visa" class="payment-logo" />
-              <img src="{% static 'img/mastercard.svg' %}" alt="Mastercard" class="payment-logo" />
-              <img src="{% static 'img/oca.png' %}" alt="Oca" width="100" class="payment-logo" />
-              <img src="{% static 'img/diners.svg' %}" alt="Diners Club" class="payment-logo" />
-            </div>
-          </div>
-
-          <div class="block">
-            <h2 class="title is-4">Cómo funciona</h2>
-            <div class="block">
-              <h4 class="title is-5 mb-2"><i class="lni lni-cart-full instruction-icon"></i> Compra tu pack</h4>
-              <p>Con la seguridad de comprar con el respaldo de Mercado Pago</p>
-            </div>
-            <div class="block">
-              <h4 class="title is-5 mb-2"><i class="lni lni-envelope instruction-icon"></i> Abre tu correo</h4>
-              <p>Recibirás el Pack en tu correo electrónico con los links de acceso a los diseños</p>
-            </div>
-            <div class="block">
-              <h4 class="title is-5 mb-2"><i class="lni lni-star-half instruction-icon"></i> ¡Crea!</h4>
-              <p>Puedes publicar las imágenes directamente en tu perfil o editar los diseños</p>
-            </div>
-          </div>
+        <div class="block">
+          <span class="icon"><i class="lni lni-star-fill"></i></span>
+          <span class="icon"><i class="lni lni-star-fill"></i></span>
+          <span class="icon"><i class="lni lni-star-fill"></i></span>
+          <span class="icon"><i class="lni lni-star-fill"></i></span>
+          <span class="icon"><i class="lni lni-star-fill"></i></span>
+          {% if pack.strikethrough_price %}
+          <br />
+          <s class="has-text-grey-light"
+            ><small>${{ pack.strikethrough_price }}</small></s
+          >
+          {% endif %}
+          <h5 class="subtitle is-2 price">${{ pack.price }}</h5>
         </div>
-      </div>
-      <div class="block mt-4">
-        <h2 class="title is-4">Algunos diseños incluidos</h2>
-        <div class="columns is-multiline is-mobile">
-          {% for illustration in pack.illustrations.all|slice:':8' %}
-            <div class="column is-one-quarter-desktop is-half-mobile">
-              <figure class="image is-1by1">
-                <img src="{{ illustration.image.url }}" alt="{{ pack.id }}" class="slightly-rotate-hover" style="border-radius: 8px" />
-              </figure>
-            </div>
-          {% endfor %}
+        <div class="block">
+          <p class="content">{{ pack.subtitle }}</p>
+        </div>
+        <div class="block">
+          <a
+            href="{% url 'main:order_form' pack.id %}"
+            class="button is-primary is-rounded"
+            >Comprar ahora</a
+          >
         </div>
       </div>
     </div>
-  </section>
+
+    <div class="block columns border-bottom">
+      <div class="column is-two-thirds-desktop border-right">
+        <div class="block pb-4">
+          <h2 class="title is-4">Acerca del pack</h2>
+          <div>{{ pack.description|safe }}</div>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="block border-bottom">
+          <h2 class="title is-4">Medios de pago</h2>
+          <div class="block">
+            <p>
+              Pagá con
+              <img
+                src="{% static 'img/mercadopago.svg' %}"
+                alt="Mercado Pago"
+                width="120"
+                style="vertical-align: middle; margin-left: 0.6rem"
+              />
+            </p>
+          </div>
+          <div class="block pb-4">
+            <p>Tarjetas de débito y crédito</p>
+            <img
+              src="{% static 'img/visa.svg' %}"
+              alt="Visa"
+              class="payment-logo"
+            />
+            <img
+              src="{% static 'img/mastercard.svg' %}"
+              alt="Mastercard"
+              class="payment-logo"
+            />
+            <img
+              src="{% static 'img/oca.png' %}"
+              alt="Oca"
+              width="100"
+              class="payment-logo"
+            />
+            <img
+              src="{% static 'img/diners.svg' %}"
+              alt="Diners Club"
+              class="payment-logo"
+            />
+          </div>
+        </div>
+
+        <div class="block">
+          <h2 class="title is-4">Cómo funciona</h2>
+          <div class="block">
+            <h4 class="title is-5 mb-2">
+              <i class="lni lni-cart-full instruction-icon"></i> Compra tu pack
+            </h4>
+            <p>Con la seguridad de comprar con el respaldo de Mercado Pago</p>
+          </div>
+          <div class="block">
+            <h4 class="title is-5 mb-2">
+              <i class="lni lni-envelope instruction-icon"></i> Abre tu correo
+            </h4>
+            <p>
+              Recibirás el Pack en tu correo electrónico con los links de acceso
+              a los diseños
+            </p>
+          </div>
+          <div class="block">
+            <h4 class="title is-5 mb-2">
+              <i class="lni lni-star-half instruction-icon"></i> ¡Crea!
+            </h4>
+            <p>
+              Puedes publicar las imágenes directamente en tu perfil o editar
+              los diseños
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="block mt-4">
+      <h2 class="title is-4">Algunos diseños incluidos</h2>
+      <div class="columns is-multiline is-mobile">
+        {% for illustration in pack.illustrations.all|slice:':8' %}
+        <div class="column is-one-quarter-desktop is-half-mobile">
+          <figure class="image is-1by1">
+            <img
+              src="{{ illustration.image.url }}"
+              alt="{{ pack.id }}"
+              class="slightly-rotate-hover"
+              style="border-radius: 8px"
+            />
+          </figure>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock %}

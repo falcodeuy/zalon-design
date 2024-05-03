@@ -1,9 +1,6 @@
 from django import forms
 from django.utils.translation import gettext as _
-
 from apps.main.models import Order, Customer
-
-from apps.main.utils import send_confirmation_email
 
 
 class OrderForm(forms.ModelForm):
@@ -75,5 +72,4 @@ class OrderForm(forms.ModelForm):
             },
         )
         order = Order.objects.create(pack=pack, customer=customer)
-        send_confirmation_email(order)
         return order

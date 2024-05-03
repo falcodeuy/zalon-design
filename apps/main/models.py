@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from PIL import Image
+from apps.main.utils import send_confirmation_email
 from django_ckeditor_5.fields import CKEditor5Field
 
 
@@ -46,7 +47,7 @@ class Customer(models.Model):
 
 class Pack(models.Model):
     name = models.CharField("Nombre", max_length=100)
-    subtitle = models.CharField("Subtítulo", max_length=100)
+    subtitle = models.CharField("Subtítulo", max_length=100, default="")
     description = CKEditor5Field("Descripción")
     price = models.DecimalField("Precio", max_digits=6, decimal_places=0)
     strikethrough_price = models.DecimalField(
@@ -117,3 +118,29 @@ class Contact(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.email}"
+
+
+class Payment(models.Model):
+    order = models.OneToOneField(
+        "Order", on_delete=models.CASCADE, verbose_name="Orden", related_name="payment"
+    )
+    created_at = models.DateTimeField("Fecha de creación")
+    last_modified = models.DateTimeField("Última modificación")
+    amount = models.DecimalField("Monto", max_digits=6, decimal_places=0)
+    payment_method = models.CharField("Método de pago", max_length=100)
+    payment_type = models.CharField("Tipo de pago", max_length=100)
+    payment_status = models.CharField("Estado de pago", max_length=100)
+    payment_id = models.CharField("ID de pago", max_length=100)
+    payment_provider = models.CharField("Proveedor de pago", max_length=100)
+
+    def save(self, *args, **kwargs):
+        new_payment_status = kwargs.get("payment_status", self.payment_status)
+
+        if self.payment_status != new_payment_status:
+            if new_payment_status == "approved":
+                send_confirmation_email(self.order)
+            elif new_payment_status == "cancelled" or new_payment_status == "rejected":
+                print("Bad payment")
+            else:
+                print("Pending")
+        super().save(*args, **kwargs)

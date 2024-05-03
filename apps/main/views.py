@@ -1,14 +1,20 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
-from django.conf import settings
-from django.contrib.auth.decorators import login_required
-from django.http import FileResponse, Http404
-import os
-
-from .models import Pack, CustomerReview, Order
+from .forms.contact_form import ContactForm
+from .models import Pack, CustomerReview, Order, Payment
 from .forms.order_form import OrderForm
 from .forms.customer_review import CustomerReviewForm
-from .forms.contact_form import ContactForm
+from django.conf import settings
+import mercadopago
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse, FileResponse, Http404, HttpResponseRedirect
+from .utils import check_mp_signature
+import json
+import requests
+import os
+
+MP_ACCESS_TOKEN = os.environ.get("MP_ACCESS_TOKEN")
+sdk = mercadopago.SDK(MP_ACCESS_TOKEN)
 
 
 def home(request):
@@ -28,15 +34,38 @@ def home(request):
 def pack_detail(request, id):
     pack = Pack.objects.get(id=id)
     context = {"pack": pack}
+
     return render(request, "main/pack_detail.html", context)
 
 
 def order_form(request, pack_id):
+    pack = Pack.objects.get(id=pack_id)
+
     if request.method == "POST":
         form = OrderForm(request.POST, pack_id=pack_id)
         if form.is_valid():
             order = form.save()
-            return HttpResponseRedirect(f"/thanks/?order={order.id}")
+            preference_data = {
+                "back_urls": {
+                    "success": f"https://design.zalon.app/thanks/?order={order.id}",
+                    "failure": f"https://design.zalon.app/error/?order={order.id}",
+                    "pending": f"https://design.zalon.app/thanks/?order={order.id}",
+                },
+                "auto_return": "approved",  # if the payment is successful this redirect automatically to success url.
+                "metadata": {"zalon_order_id": order.id},
+                "items": [
+                    {
+                        "title": pack.name,
+                        "quantity": 1,
+                        "unit_price": float(pack.price),
+                    }
+                ],
+            }
+
+            preference_response = sdk.preference().create(preference_data)
+            preference = preference_response["response"]
+            return HttpResponseRedirect(preference["init_point"])
+
         else:
             return HttpResponseRedirect("/error/")
 
@@ -100,3 +129,53 @@ def serve_protected_file(request, file_path):
         )
     else:
         raise Http404("File does not exist")
+
+
+@csrf_exempt
+def mp_notification(request):
+    if request.method == "POST":
+        # Obtain the x-signature value from the header
+        signature_valid = check_mp_signature(request)
+        if signature_valid:
+            # Extract the data from the request
+            body = request.body.decode("utf-8")
+            body_dict = json.loads(body)
+            payment_id = body_dict["data"]["id"]
+            payment_id = body_dict["data"]["id"]
+            url = f"https://api.mercadopago.com/v1/payments/{payment_id}"
+            headers = {"Authorization": f"Bearer {MP_ACCESS_TOKEN}"}
+            response = requests.get(url, headers=headers)
+
+            print(json.dumps(response.json(), indent=4))
+            payment_response = response.json()
+
+            ## check if payment already exist, in that case update it
+            payment = Payment.objects.filter(payment_id=payment_response["id"]).first()
+
+            if payment:
+
+                payment.payment_status = payment_response["status"]
+                payment.last_modified = payment_response["date_last_updated"]
+                payment.save()
+
+            else:
+
+                Payment.objects.create(
+                    order=Order.objects.get(
+                        id=payment_response["metadata"]["zalon_order_id"]
+                    ),
+                    created_at=payment_response["date_created"],
+                    last_modified=payment_response["date_last_updated"],
+                    amount=payment_response["transaction_amount"],
+                    payment_method=payment_response["payment_method_id"],
+                    payment_type=payment_response["payment_type_id"],
+                    payment_status=payment_response["status"],
+                    payment_id=payment_response["id"],
+                    payment_provider="mercadopago",
+                )
+
+            return HttpResponse(status=200)
+        else:
+            return HttpResponse("Invalid signature", status=400)
+    else:
+        return HttpResponse(status=405)  # Method Not Allowed
