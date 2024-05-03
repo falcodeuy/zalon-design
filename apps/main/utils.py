@@ -1,6 +1,6 @@
+from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
 from django.template.loader import render_to_string
-from django.core.mail import send_mail
 import hashlib
 import hmac
 import urllib.parse
@@ -10,7 +10,7 @@ import os
 def send_confirmation_email(order):
     subject = f"Gracias por tu compra - #{order.id}"
     # Render HTML template
-    html_message = render_to_string(
+    html_content = render_to_string(
         "email/order_confirmation.html",
         {
             "order": order,
@@ -19,12 +19,16 @@ def send_confirmation_email(order):
             "server_name": settings.SERVER_NAME,
         },
     )
-
+    text_content = "Gracias por tu compra"
     email_from = settings.EMAIL_HOST_USER
     recipient_list = [order.customer.email]
+    message = EmailMultiAlternatives(subject, text_content, email_from, recipient_list)
+    message.attach_alternative(html_content, "text/html")
 
-    # Pass HTML content as message
-    send_mail(subject, None, email_from, recipient_list, html_message=html_message)
+    if order.pack.instructions_file:
+        message.attach_file(order.pack.instructions_file.path)
+
+    message.send()
 
 
 def send_contact_notification_email(contact_msg):
