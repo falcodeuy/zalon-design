@@ -125,8 +125,8 @@ class ContactMsgAdmin(admin.ModelAdmin):
 
 @admin.register(Payment)
 class PaymentAdmin(admin.ModelAdmin):
-    list_display = ("id", "order", "created_at", "last_modified", "amount")
-    search_fields = ("order__id",)
+    list_display = ("id", "order_id", "customer_email", "created_at", "last_modified", "amount")
+    search_fields = ("order__customer__email",)
     ordering = ("last_modified", "created_at")
     readonly_fields = (
         "order",
@@ -139,3 +139,8 @@ class PaymentAdmin(admin.ModelAdmin):
         "payment_id",
         "payment_provider",
     )
+    def order_id(self, obj):
+        return obj.order.id
+
+    def customer_email(self, obj):
+        return obj.order.customer.email
