@@ -7,7 +7,7 @@ from .models import (
     Customer,
     CustomerReview,
     Order,
-    Contact,
+    ContactMsg,
     Payment,
 )
 from .forms.admin import PackAdminForm
@@ -106,11 +106,12 @@ class OrderAdmin(admin.ModelAdmin):
     ordering = ("customer", "pack", "created_at")
 
 
-@admin.register(Contact)
-class ContactAdmin(admin.ModelAdmin):
+@admin.register(ContactMsg)
+class ContactMsgAdmin(admin.ModelAdmin):
     list_display = ("name", "email", "created_at")
     search_fields = ("name", "email")
     ordering = ("name", "email", "created_at")
+    readonly_fields = ("name", "email", "message", "created_at")
 
 
 @admin.register(Payment)

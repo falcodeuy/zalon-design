@@ -10,8 +10,8 @@ body {
 
 .base-wrapper {
   min-height: calc(
-    100vh - 175px - 96px
-  ); /* 175px is the height of the footer and 96px is the height of the navbar */
+    100vh - 368px - 96px
+  ); /* 368px is the height of the footer and 96px is the height of the navbar */
 }
 
 .white-rounded-box {

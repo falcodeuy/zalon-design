@@ -39,7 +39,7 @@
       <header>
         <nav id="navbar" class="navbar is-justify-content-center" role="navigation" aria-label="main navigation">
           <div class="navbar-brand">
-            <a class="navbar-item is-hidden-desktop" href="/"><img src="{% static '/img/zalon_design_logo.png' %}" alt="Logo" /></a>
+            <a class="navbar-item is-hidden-desktop" href="/"><img src="{% static '/img/zalon_design_logo.png' %}" alt="Zalon Design logo" /></a>
 
             {% comment %}Menu button for mobile hidden for now{% endcomment %}
             {% comment %} <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar-zalon">
@@ -63,7 +63,7 @@
 
     {% endblock %}
 
-    <footer class="footer" style="min-height:175px">
+    <footer class="footer">
       <div class="block has-text-centered">
         <p class="block">¿Necesitas ayuda con algo? No dudes en escribirnos.</p>
         <a href="{% url 'main:contact' %}" class="button is-link is-light is-rounded">Contacto</a>
@@ -75,6 +75,9 @@
           <a href="http://falcode.dev">Falcode</a>. This is open sourced for you
           <a href="https://github.com/falcodeuy/zalon-design/">here</a> 💜
         </p>
+      </div>
+      <div class="block has-text-centered">
+        <a href="/"><img src="{% static '/img/zalon_design_logo.png' %}" width="150" alt="Zalon Design logo" /></a>
       </div>
     </footer>
 

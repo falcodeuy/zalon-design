@@ -27,13 +27,13 @@ def send_confirmation_email(order):
     send_mail(subject, None, email_from, recipient_list, html_message=html_message)
 
 
-def send_contact_email(contact):
-    subject = f"Nuevo mensaje de contacto - {contact.name}"
+def send_contact_notification_email(contact_msg):
+    subject = f"Nuevo mensaje de contacto en Zalon Design: {contact_msg.name}"
     # Render HTML template
     html_message = render_to_string(
-        "email/contact_confirmation.html",
+        "email/contact_notification.html",
         {
-            "contact": contact,
+            "contact": contact_msg,
             "server_name": settings.SERVER_NAME,
         },
     )

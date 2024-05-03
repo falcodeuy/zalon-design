@@ -105,16 +105,15 @@ class Order(models.Model):
         return f"{self.customer} - {self.pack} - {self.created_at}"
 
 
-class Contact(models.Model):
+class ContactMsg(models.Model):
     name = models.CharField("Nombre", max_length=100)
-    business = models.CharField("Empresa", max_length=100)
     email = models.EmailField("Email")
     message = models.TextField("Mensaje")
     created_at = models.DateTimeField("Fecha", auto_now_add=True)
 
     class Meta:
-        verbose_name = _("Mensaje")
-        verbose_name_plural = _("Mensajes")
+        verbose_name = _("Mensaje de contacto")
+        verbose_name_plural = _("Mensajes de contacto")
 
     def __str__(self):
         return f"{self.name} - {self.email}"
