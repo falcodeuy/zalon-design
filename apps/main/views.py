@@ -17,6 +17,7 @@ from .utils import check_mp_signature
 
 
 MP_ACCESS_TOKEN = os.environ.get("MP_ACCESS_TOKEN")
+SERVER_NAME = os.environ.get("SERVER_NAME")
 sdk = mercadopago.SDK(MP_ACCESS_TOKEN)
 
 
@@ -50,9 +51,9 @@ def order_form(request, pack_id):
             order = form.save()
             preference_data = {
                 "back_urls": {
-                    "success": f"https://design.zalon.app/thanks/?order={order.id}",
-                    "failure": f"https://design.zalon.app/error/?order={order.id}",
-                    "pending": f"https://design.zalon.app/thanks/?order={order.id}",
+                    "success": f"https://{SERVER_NAME}/thanks/?order={order.id}",
+                    "failure": f"https://{SERVER_NAME}/error/?order={order.id}",
+                    "pending": f"https://{SERVER_NAME}/thanks/?order={order.id}",
                 },
                 "auto_return": "approved",  # if the payment is successful this redirect automatically to success url.
                 "metadata": {"zalon_order_id": order.id},
