@@ -21,3 +21,21 @@ def send_confirmation_email(order):
 
     # Pass HTML content as message
     send_mail(subject, None, email_from, recipient_list, html_message=html_message)
+
+
+def send_contact_email(contact):
+    subject = f"Nuevo mensaje de contacto - {contact.name}"
+    # Render HTML template
+    html_message = render_to_string(
+        "email/contact_confirmation.html",
+        {
+            "contact": contact,
+            "server_name": settings.SERVER_NAME,
+        },
+    )
+
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = settings.CONTACT_EMAILS
+
+    # Pass HTML content as message
+    send_mail(subject, None, email_from, recipient_list, html_message=html_message)

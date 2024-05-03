@@ -35,6 +35,8 @@ DEBUG = bool(os.environ.get("DEBUG", default=False))
 
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 
+CONTACT_EMAILS = os.environ.get("CONTACT_EMAILS").split(" ")
+
 CSRF_TRUSTED_ORIGINS = [
     "https://design.zalon.app",
 ]

@@ -8,6 +8,7 @@ import os
 from .models import Pack, CustomerReview, Order
 from .forms.order_form import OrderForm
 from .forms.customer_review import CustomerReviewForm
+from .forms.contact_form import ContactForm
 
 
 def home(request):
@@ -43,6 +44,20 @@ def order_form(request, pack_id):
         form = OrderForm(pack_id=pack_id)
     context = {"form": form}
     return render(request, "main/order_form.html", context)
+
+
+def contact(request):
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect("/contact_sent/")
+        else:
+            return HttpResponseRedirect("/error/")
+    else:
+        form = ContactForm()
+    context = {"form": form}
+    return render(request, "main/contact.html", context)
 
 
 def thanks(request):
