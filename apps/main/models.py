@@ -136,11 +136,10 @@ class Payment(models.Model):
     def save(self, *args, **kwargs):
         new_payment_status = kwargs.get("payment_status", self.payment_status)
 
-        if self.payment_status != new_payment_status:
-            if new_payment_status == "approved":
-                send_confirmation_email(self.order)
-            elif new_payment_status == "cancelled" or new_payment_status == "rejected":
-                print("Bad payment")
-            else:
-                print("Pending")
+        if new_payment_status == "approved":
+            send_confirmation_email(self.order)
+        elif new_payment_status == "cancelled" or new_payment_status == "rejected":
+            print("Bad payment")
+        else:
+            print("Pending")
         super().save(*args, **kwargs)
