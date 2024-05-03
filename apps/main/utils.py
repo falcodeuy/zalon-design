@@ -33,7 +33,7 @@ def send_contact_notification_email(contact_msg):
     html_message = render_to_string(
         "email/contact_notification.html",
         {
-            "contact": contact_msg,
+            "contact_msg": contact_msg,
             "server_name": settings.SERVER_NAME,
         },
     )
