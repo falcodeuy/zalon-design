@@ -132,6 +132,10 @@ class Payment(models.Model):
     payment_id = models.CharField("ID de pago", max_length=100)
     payment_provider = models.CharField("Proveedor de pago", max_length=100)
 
+    class Meta:
+        verbose_name = _("Pago")
+        verbose_name_plural = _("Pagos")
+
     def save(self, *args, **kwargs):
         new_payment_status = kwargs.get("payment_status", self.payment_status)
 
