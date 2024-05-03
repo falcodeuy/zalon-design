@@ -1,17 +1,22 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends 'base.html' %} {% load static %}
 {% block title %}
   Zalon Design - Mensaje enviado
 {% endblock %}
 {% block content %}
   <section class="section base-wrapper">
-    <div class="container white-rounded-box p-6 is-fullheight">
-      <div class="columns is-vcentered is-centered">
-        <div class="column is-half">
-          <h1 class="title">¡Mensaje enviado!</h1>
-          <p class="subtitle">En breve nos pondremos en contacto contigo.</p>
-          <a href="{% url 'main:home' %}" class="button is-primary">Volver al inicio</a>
-        </div>
+    <div class="container white-rounded-box">
+      <div class="block">
+        <h1 class="has-text-centered title">Mensaje enviado</h1>
+      </div>
+
+      <div class="block has-text-centered">
+        <p>
+          En breve nos pondremos en contacto contigo, responderemos al mail <b>{{ contact_msg.email }}</b>
+        </p>
+      </div>
+
+      <div class="block has-text-centered">
+        <a href="{% url 'main:home' %}" class="button ml-3 is-link is-rounded">Volver al inicio</a>
       </div>
     </div>
   </section>

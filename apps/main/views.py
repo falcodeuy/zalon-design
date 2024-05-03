@@ -1,17 +1,20 @@
-from django.shortcuts import render
-from .forms.contact_form import ContactForm
-from .models import Pack, CustomerReview, Order, Payment
-from .forms.order_form import OrderForm
-from .forms.customer_review import CustomerReviewForm
-from django.conf import settings
-import mercadopago
-from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, FileResponse, Http404, HttpResponseRedirect
-from .utils import check_mp_signature
 import json
 import requests
 import os
+import mercadopago
+
+from django.shortcuts import render
+from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse, FileResponse, Http404, HttpResponseRedirect
+
+from .forms.contact_form import ContactForm
+from .models import Pack, CustomerReview, Order, Payment, ContactMsg
+from .forms.order_form import OrderForm
+from .forms.customer_review import CustomerReviewForm
+from .utils import check_mp_signature
+
 
 MP_ACCESS_TOKEN = os.environ.get("MP_ACCESS_TOKEN")
 sdk = mercadopago.SDK(MP_ACCESS_TOKEN)
@@ -79,14 +82,25 @@ def contact(request):
     if request.method == "POST":
         form = ContactForm(request.POST)
         if form.is_valid():
-            form.save()
-            return HttpResponseRedirect("/contact_sent/")
+            contact_msg = form.save()
+            return HttpResponseRedirect(
+                f"/contact_confirmation/?contact_msg={contact_msg.id}"
+            )
         else:
             return HttpResponseRedirect("/error/")
     else:
         form = ContactForm()
     context = {"form": form}
     return render(request, "main/contact.html", context)
+
+
+def contact_confirmation(request):
+    contact_msg = request.GET.get("contact_msg")
+    contact_msg = ContactMsg.objects.filter(id=contact_msg).first()
+    if not contact_msg:
+        return HttpResponseRedirect("/error/")
+    context = {"contact_msg": contact_msg}
+    return render(request, "main/contact_confirmation.html", context)
 
 
 def thanks(request):

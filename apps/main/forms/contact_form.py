@@ -50,3 +50,4 @@ class ContactForm(forms.Form):
             message=self.cleaned_data["message"],
         )
         send_contact_notification_email(contact_msg)
+        return contact_msg
