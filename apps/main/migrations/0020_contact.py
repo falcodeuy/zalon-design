@@ -6,22 +6,30 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('main', '0019_alter_pack_subtitle'),
+        ("main", "0019_alter_pack_instructions_file_alter_pack_subtitle"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Contact',
+            name="Contact",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100, verbose_name='Nombre')),
-                ('business', models.CharField(max_length=100, verbose_name='Empresa')),
-                ('email', models.EmailField(max_length=254, verbose_name='Email')),
-                ('message', models.TextField(verbose_name='Mensaje')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100, verbose_name="Nombre")),
+                ("business", models.CharField(max_length=100, verbose_name="Empresa")),
+                ("email", models.EmailField(max_length=254, verbose_name="Email")),
+                ("message", models.TextField(verbose_name="Mensaje")),
             ],
             options={
-                'verbose_name': 'Contacto',
-                'verbose_name_plural': 'Contactos',
+                "verbose_name": "Contacto",
+                "verbose_name_plural": "Contactos",
             },
         ),
     ]
