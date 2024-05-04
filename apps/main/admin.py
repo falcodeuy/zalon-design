@@ -67,19 +67,16 @@ class PackAdmin(admin.ModelAdmin):
 
 @admin.register(CustomerReview)
 class CustomerReviewAdmin(admin.ModelAdmin):
-    list_display = ("customer", "pack", "image_tag")
+    list_display = (
+        "customer",
+        "pack",
+    )
     search_fields = ("customer", "review")
-    readonly_fields = ("customer", "pack", "review", "image_tag")
-
-    def image_tag(self, obj):
-        if obj.customer.photo:
-            return format_html(
-                '<img src="{}" width="48" height="48" />'.format(obj.customer.photo.url)
-            )
-        else:
-            return "Cliente sin foto"
-
-    image_tag.short_description = "imagen"
+    readonly_fields = (
+        "customer",
+        "pack",
+        "review",
+    )
 
 
 @admin.register(Customer)
@@ -87,17 +84,6 @@ class CustomerAdmin(admin.ModelAdmin):
     list_display = ("name", "business", "email", "phone")
     search_fields = ("name", "business", "email", "phone")
     ordering = ("name", "business", "email", "phone")
-    readonly_fields = ("photo_tag",)
-
-    def photo_tag(self, obj):
-        if obj.photo:
-            return format_html(
-                '<img src="{}" width="48" height="48" />'.format(obj.photo.url)
-            )
-        else:
-            return "Cliente sin foto"
-
-    photo_tag.short_description = "foto"
 
 
 @admin.register(Order)
@@ -125,7 +111,14 @@ class ContactMsgAdmin(admin.ModelAdmin):
 
 @admin.register(Payment)
 class PaymentAdmin(admin.ModelAdmin):
-    list_display = ("id", "order_id", "customer_email", "created_at", "last_modified", "amount")
+    list_display = (
+        "id",
+        "order_id",
+        "customer_email",
+        "created_at",
+        "last_modified",
+        "amount",
+    )
     search_fields = ("order__customer__email",)
     ordering = ("last_modified", "created_at")
     readonly_fields = (
@@ -139,6 +132,7 @@ class PaymentAdmin(admin.ModelAdmin):
         "payment_id",
         "payment_provider",
     )
+
     def order_id(self, obj):
         return obj.order.id
 
