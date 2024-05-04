@@ -3,6 +3,8 @@ import requests
 import os
 import mercadopago
 
+
+from bs4 import BeautifulSoup
 from django.shortcuts import render
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
@@ -27,10 +29,22 @@ def home(request):
     )
     customer_reviews = CustomerReview.objects.all()[:25]
     orders_count = Order.objects.count()
+
+    # TODO move this to a service and call it using AJAX to avoid relanting the initial page load
+    def get_instagram_followers():
+        url = f"https://www.instagram.com/zalon.app"
+        r = requests.get(url)
+        soup = BeautifulSoup(r.text, "html.parser")
+        data = soup.find_all("meta", attrs={"property": "og:description"})
+        text = data[0].get("content").split()
+        followers = text[0]
+        return followers.replace(",", ".")
+
     context = {
         "packs": packs,
         "customer_reviews": customer_reviews,
         "orders_count": orders_count,
+        "instagram_followers": get_instagram_followers(),
     }
     return render(request, "main/home.html", context)
 
