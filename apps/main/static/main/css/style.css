@@ -66,8 +66,7 @@
   gap: 2em;
   /* Optional: Adds some space between the boxes */
   animation: horizontal-scroll 120s linear infinite;
-  padding-top: 64px;
-  padding-bottom: 128px;
+  padding: 64px 0;
 }
 
 /* Faster animation in mobile */
