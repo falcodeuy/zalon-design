@@ -63,6 +63,32 @@ class Pack(models.Model):
     def __str__(self):
         return self.name
 
+    @property
+    def score(self):
+        """
+        The average score of the reviews of the pack
+        """
+        reviews = self.reviews.all()
+        if reviews:
+            total_count = reviews.count()
+            total_score = sum([review.score for review in reviews])
+            return int(total_score / total_count)
+        return 5
+
+    @property
+    def filled_stars(self):
+        """
+        Easy way to get the filled stars to display in the templates
+        """
+        return range(self.score)
+
+    @property
+    def empty_stars(self):
+        """
+        Easy way to get the empty stars to display in the templates
+        """
+        return range(5 - self.score)
+
 
 class CustomerReview(models.Model):
     customer = models.ForeignKey(
@@ -81,8 +107,7 @@ class CustomerReview(models.Model):
     score = models.PositiveSmallIntegerField(
         "Puntuación",
         validators=[MinValueValidator(1), MaxValueValidator(5)],
-        null=True,
-        blank=True,
+        default=5,
     )
 
     class Meta:
@@ -91,6 +116,20 @@ class CustomerReview(models.Model):
 
     def __str__(self):
         return f"{self.customer} - {self.pack}"
+
+    @property
+    def filled_stars(self):
+        """
+        Easy way to get the filled stars to display in the templates
+        """
+        return range(self.score)
+
+    @property
+    def empty_stars(self):
+        """
+        Easy way to get the empty stars to display in the templates
+        """
+        return range(5 - self.score)
 
 
 class Order(models.Model):

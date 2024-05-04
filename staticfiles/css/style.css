@@ -27,6 +27,13 @@ body {
   }
 }
 
+/* Lineicons custom fixes */
+
+.icon {
+  margin: -4px;
+  color: #5271ff;
+}
+
 /* Hover effects */
 
 .slightly-rotate-hover {

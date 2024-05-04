@@ -82,13 +82,21 @@
         {% for review in customer_reviews %}
           <div class="box review">
             <div class="media block">
-              <div class="media-left" style="width: 90px;">
+              <div class="media-left mt-3" style="width: 90px;">
                 <figure class="image is-4by3">
                   <img src="{{ media_root }}{{ review.pack.cover.url }}" alt="review" style="border-radius: 4px;" />
                 </figure>
               </div>
 
               <div class="media-content">
+                <p>
+                  {% for i in review.filled_stars %}
+                    <span class="icon"><i class="lni lni-star-fill score-star"></i></span>
+                  {% endfor %}
+                  {% for i in review.empty_stars %}
+                    <span class="icon"><i class="lni lni-star-empty score-star"></i></span>
+                  {% endfor %}
+                </p>
                 <p class="is-size-4">{{ review.customer.name }}</p>
                 <p class="is-size-6">{{ review.customer.business }}</p>
               </div>
