@@ -7,7 +7,7 @@ urlpatterns = [
     path("pack/<int:id>/", views.pack_detail, name="pack_detail"),
     path("pack/order-form/<int:pack_id>", views.order_form, name="order_form"),
     path(
-        "customer-review/<int:pack_id>/<int:customer_id>/",
+        "customer-review/",
         views.customer_review,
         name="customer_review",
     ),

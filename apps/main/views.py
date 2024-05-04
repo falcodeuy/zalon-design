@@ -115,7 +115,9 @@ def error(request):
     return render(request, "main/error.html")
 
 
-def customer_review(request, pack_id, customer_id):
+def customer_review(request):
+    pack_id = request.GET.get("pack")
+    customer_id = request.GET.get("customer")
     if request.method == "POST":
         form = CustomerReviewForm(
             request.POST, pack_id=pack_id, customer_id=customer_id
@@ -129,7 +131,7 @@ def customer_review(request, pack_id, customer_id):
     else:
         form = CustomerReviewForm(pack_id=pack_id, customer_id=customer_id)
     context = {"form": form}
-    return render(request, "main/review.html", context)
+    return render(request, "main/customer_review.html", context)
 
 
 @login_required

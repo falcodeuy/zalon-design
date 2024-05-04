@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-  <section class="section">
-    <div class="container">
+  <section class="section base-wrapper">
+    <div class="container white-rounded-box">
       <div class="columns is-desktop is-vcentered is-centered">
         <div class="column is-half">
-          <h1 class="title">Tus datos para enviarte la compra</h1>
+          <h1 class="title">Cuéntanos qué opinas</h1>
           <form method="post">
             {% csrf_token %}
 
@@ -21,10 +21,10 @@
 
             <div class="field is-grouped mt-6">
               <div class="control">
-                <button class="button is-link is-light" onclick="window.history.back()">Cancelar</button>
+                <button class="button is-light is-danger" onclick="window.history.back()">Cancelar</button>
               </div>
               <div class="control">
-                <button class="button is-link" type="submit">Ir a pagar</button>
+                <button class="button is-primary" type="submit">Enviar</button>
               </div>
             </div>
           </form>
