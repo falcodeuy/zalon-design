@@ -11,10 +11,10 @@
   <div id="landing-page">
     <section class="section">
       <div class="container">
-        <h1 class="title has-text-centered">Packs disponibles</h1>
-        <h3 class="subtitle has-text-centered">¡No esperes más para hacer despegar tu negocio!</h3>
+        <h1 class="title has-text-centered has-text-primary is-2">Packs disponibles</h1>
+        <h3 class="subtitle has-text-centered mb-6 is-5">¡No esperes más para hacer despegar tu negocio!</h3>
 
-        <div class="columns is-desktop">
+        <div class="columns is-desktop mt-6">
           {% for pack in packs %}
             <div class="column is-one-third">
               <div class="box card slightly-rotate-hover pack-card">
@@ -26,10 +26,12 @@
                 </div>
                 <div class="card-content">
                   <p class="title block">{{ pack.name }}</p>
-                  <p class="subtitle block">{{ pack.subtitle }}</p>
+                  <p class="subtitle block">
+                    <small>{{ pack.subtitle }}</small>
+                  </p>
 
                   <div class="block">
-                    <a href="{% url 'main:pack_detail' pack.id %}" class="button is-primary is-rounded">Ver pack</a>
+                    <a href="{% url 'main:pack_detail' pack.id %}" class="button is-link is-light is-rounded">Ver pack</a>
                   </div>
                 </div>
               </div>
@@ -71,7 +73,7 @@
         {% for review in customer_reviews %}
           <div class="box review">
             <div class="media block">
-              <div class="media-left mt-s" style="width: 90px;">
+              <div class="media-left" style="width: 90px;">
                 <figure class="image is-4by3">
                   <img src="{{ media_root }}{{ review.pack.cover.url }}" alt="review" style="border-radius: 4px;" />
                 </figure>
