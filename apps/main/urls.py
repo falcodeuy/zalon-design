@@ -5,9 +5,9 @@ app_name = "main"
 urlpatterns = [
     path("", views.home, name="home"),
     path("pack/<int:id>/", views.pack_detail, name="pack_detail"),
-    path("pack/order_form/<int:pack_id>", views.order_form, name="order_form"),
+    path("pack/order-form/<int:pack_id>", views.order_form, name="order_form"),
     path(
-        "customer_review/<int:pack_id>/<int:customer_id>/",
+        "customer-review/<int:pack_id>/<int:customer_id>/",
         views.customer_review,
         name="customer_review",
     ),
@@ -16,6 +16,6 @@ urlpatterns = [
     path("error/", views.error, name="error"),
     path("contact/", views.contact, name="contact"),
     path(
-        "contact_confirmation/", views.contact_confirmation, name="contact_confirmation"
+        "contact-confirmation/", views.contact_confirmation, name="contact_confirmation"
     ),
 ]

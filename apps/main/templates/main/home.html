@@ -9,6 +9,7 @@
 
 {% block content %}
   <div id="landing-page">
+    {% comment %}Packs list section{% endcomment %}
     <section class="section">
       <div class="container">
         <h1 class="title has-text-centered has-text-primary is-2">Packs disponibles</h1>
@@ -44,32 +45,40 @@
             <div>
               <i class="lni lni-users level-icon"></i>
               <p class="heading">Seguidores en redes</p>
-              <p class="title">6.430</p>
+              <p class="is-size-2">
+                <b>6.430</b>
+              </p>
             </div>
           </div>
           <div class="level-item has-text-centered">
             <div>
               <i class="lni lni-rocket level-icon"></i>
               <p class="heading">Packs vendidos</p>
-              <p class="title">{{ orders_count }}</p>
+              <p class="is-size-2">
+                <b>{{ orders_count }}</b>
+              </p>
             </div>
           </div>
           <div class="level-item has-text-centered is-hidden-mobile">
             <div>
               <i class="lni lni-bolt level-icon"></i>
               <p class="heading">Emprendimientos usando Zalon</p>
-              <p class="title">52</p>
+              <p class="is-size-2">
+                <b>52</b>
+              </p>
             </div>
           </div>
         </nav>
       </div>
     </section>
 
-    {% comment %}Reviews section{% endcomment %}
-    <section id="reviews-section">
-      <h1 class="title has-text-centered">Qué opinan quienes han usado nuestros packs</h1>
+    <hr />
 
-      <div class="reviews-container is-flex">
+    {% comment %}Reviews section{% endcomment %}
+    <section class="section">
+      <h1 class="title has-text-centered has-text-primary is-2">¿Qué opinan quienes han usado nuestros packs?</h1>
+
+      <div class="block reviews-container is-flex">
         {% for review in customer_reviews %}
           <div class="box review">
             <div class="media block">
@@ -89,6 +98,9 @@
             </div>
           </div>
         {% endfor %}
+      </div>
+      <div class="block has-text-centered">
+        <a href="{% url 'main:contact' %}" class="button is-link is-rounded">Hacer reseña</a>
       </div>
     </section>
   </div>

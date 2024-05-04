@@ -12,7 +12,7 @@ from django.http import HttpResponse, FileResponse, Http404, HttpResponseRedirec
 from .forms.contact_form import ContactForm
 from .models import Pack, CustomerReview, Order, Payment, ContactMsg
 from .forms.order_form import OrderForm
-from .forms.customer_review import CustomerReviewForm
+from .forms.customer_review_form import CustomerReviewForm
 from .utils import check_mp_signature
 
 
@@ -85,7 +85,7 @@ def contact(request):
         if form.is_valid():
             contact_msg = form.save()
             return HttpResponseRedirect(
-                f"/contact_confirmation/?contact_msg={contact_msg.id}"
+                f"/contact-confirmation/?contact_msg={contact_msg.id}"
             )
         else:
             return HttpResponseRedirect("/error/")
