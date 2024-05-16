@@ -47,7 +47,7 @@ class Customer(models.Model):
 
 class Pack(models.Model):
     name = models.CharField("Nombre", max_length=100)
-    subtitle = models.CharField("Subtítulo", max_length=100, default="")
+    subtitle = models.CharField("Descripción corta", max_length=100, default="")
     description = CKEditor5Field("Descripción")
     price = models.DecimalField("Precio de oferta", max_digits=6, decimal_places=0)
     strikethrough_price = models.DecimalField(
