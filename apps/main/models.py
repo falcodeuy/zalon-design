@@ -18,7 +18,7 @@ class Illustration(models.Model):
 
     class Meta:
         verbose_name = _("Ilustración")
-        verbose_name_plural = _("Ilustraciones")
+        verbose_name_plural = _("Galería")
 
     def save(self, *args, **kwargs):
         super(Illustration, self).save(*args, **kwargs)
@@ -33,7 +33,7 @@ class Illustration(models.Model):
 
 class Customer(models.Model):
     name = models.CharField("Nombre", max_length=100)
-    business = models.CharField("Empresa", max_length=100)
+    business = models.CharField("Empresa", max_length=100, null=True, blank=True)
     email = models.EmailField("Email")
     phone = models.CharField("Teléfono", max_length=100, null=True, blank=True)
 
@@ -49,14 +49,14 @@ class Pack(models.Model):
     name = models.CharField("Nombre", max_length=100)
     subtitle = models.CharField("Subtítulo", max_length=100, default="")
     description = CKEditor5Field("Descripción")
-    price = models.DecimalField("Precio", max_digits=6, decimal_places=0)
+    price = models.DecimalField("Precio de oferta", max_digits=6, decimal_places=0)
     strikethrough_price = models.DecimalField(
-        "Precio tachado", max_digits=6, decimal_places=0, null=True, blank=True
+        "Precio regular", max_digits=6, decimal_places=0, null=True, blank=True
     )
     is_active = models.BooleanField("Activo", default=True)
     cover = models.ImageField("Carátula", upload_to="covers")
     instructions_file = models.FileField(
-        "Archivo de instrucciones",
+        "PDF de Pack",
         upload_to="instructions",
     )
 

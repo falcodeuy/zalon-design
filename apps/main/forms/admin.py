@@ -40,7 +40,7 @@ class PackAdminForm(forms.ModelForm):
 
     illustrations = MultipleFileField(
         widget=MultipleFileInput(),
-        label=_("Agregar ilustraciones"),
+        label=_("Agregar a galería"),
         required=True,
     )
 
