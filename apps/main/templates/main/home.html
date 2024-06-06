@@ -20,7 +20,7 @@
             <div class="column is-one-third">
               <div class="box card slightly-rotate-hover pack-card">
                 <div class="card-image">
-                  <figure class="image is-4by3">
+                  <figure class="image is-16by9">
                     <a href="{% url 'main:pack_detail' pack.id %}"><img src="{{ media_root }}{{ pack.cover.url }}" alt="pack cover" /></a>
                   </figure>
                   <div class="price-tag">${{ pack.price }}</div>
@@ -83,7 +83,7 @@
           <div class="box review">
             <div class="media block">
               <div class="media-left mt-3" style="width: 90px;">
-                <figure class="image is-4by3">
+                <figure class="image is-16by9">
                   <img src="{{ media_root }}{{ review.pack.cover.url }}" alt="review" style="border-radius: 4px;" />
                 </figure>
               </div>

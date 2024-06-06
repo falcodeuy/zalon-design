@@ -319,7 +319,7 @@ BULMA_SETTINGS = {
         "primary": "#083766",
         "size-1": "6rem",
         "link": "#5271ff",
-        "info": "#5271ff",
+        "info": "#083766",
         "body-family": "'Inter', sans-serif",
         "background": "#e7e6eb",
     },

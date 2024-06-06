@@ -8,13 +8,13 @@
     <div class="white-rounded-box container">
       <div class="columns block border-bottom">
         <div class="column is-two-thirds-desktop">
-          <figure class="image is-4by3">
+          <figure class="image is-16by9">
             <img src="{{ pack.cover.url }}" alt="{{ pack.name }}" style="border-radius: 8px" />
           </figure>
         </div>
         <div class="column">
           <div class="block">
-            <h1 class="title">{{ pack.name }}</h1>
+            <h1 class="title has-text-primary"><b style="font-weight: 700">{{ pack.name }}</b></h1>
           </div>
           <div class="block">
             {% for i in pack.filled_stars %}
@@ -25,15 +25,15 @@
             {% endfor %}
             {% if pack.strikethrough_price %}
               <br />
-              <s class="has-text-grey-light"><small>${{ pack.strikethrough_price }}</small></s>
+              <s class="has-text-grey-light" style="font-size=1.5em">${{ pack.strikethrough_price }}</s>
             {% endif %}
-            <h5 class="subtitle is-2 price">${{ pack.price }}</h5>
+            <h5 class="subtitle is-2 price has-text-primary">${{ pack.price }}</h5>
           </div>
           <div class="block">
             <p class="content">{{ pack.subtitle }}</p>
           </div>
           <div class="block">
-            <a href="{% url 'main:order_form' pack.id %}" class="button is-primary is-rounded">Comprar ahora</a>
+            <a href="{% url 'main:order_form' pack.id %}" class="button is-primary is-rounded p-5"><small>Comprar ahora</small></a>
           </div>
         </div>
       </div>
@@ -58,8 +58,8 @@
             <div class="block pb-4">
               <p>Tarjetas de débito y crédito</p>
               <img src="{% static 'img/visa.svg' %}" alt="Visa" class="payment-logo" />
-              <img src="{% static 'img/mastercard.svg' %}" alt="Mastercard" class="payment-logo" />
-              <img src="{% static 'img/oca.png' %}" alt="Oca" width="100" class="payment-logo" />
+              <img src="{% static 'img/mastercard.svg' %}" alt="Mastercard" class="payment-logo" style="width: 45px; margin-left: 5px;" />
+              <img src="{% static 'img/oca.png' %}" alt="Oca" class="payment-logo" />
               <img src="{% static 'img/diners.svg' %}" alt="Diners Club" class="payment-logo" />
             </div>
           </div>
