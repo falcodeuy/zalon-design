@@ -7,12 +7,12 @@
   <section class="section base-wrapper">
     <div class="white-rounded-box container">
       <div class="columns block border-bottom">
-        <div class="column is-two-thirds-desktop">
+        <div class="column is-two-thirds-desktop padding-wrapper">
           <figure class="image is-16by9">
             <img src="{{ pack.cover.url }}" alt="{{ pack.name }}" style="border-radius: 8px" />
           </figure>
         </div>
-        <div class="column">
+        <div class="column padding-wrapper">
           <div class="block">
             <h1 class="title has-text-primary"><b style="font-weight: 700">{{ pack.name }}</b></h1>
           </div>
@@ -33,22 +33,22 @@
             <p class="content">{{ pack.subtitle }}</p>
           </div>
           <div class="block">
-            <a href="{% url 'main:order_form' pack.id %}" class="button is-primary is-rounded p-5"><small>Comprar ahora</small></a>
+            <a href="{% url 'main:order_form' pack.id %}" class="button is-primary is-rounded py-5 px-6"><small>Comprar ahora</small></a>
           </div>
         </div>
       </div>
 
       <div class="block columns border-bottom">
-        <div class="column is-two-thirds-desktop border-right">
+        <div class="column is-two-thirds-desktop border-right padding-wrapper">
           <div class="block pb-4">
-            <h2 class="title is-4">Acerca del pack</h2>
+            <h2 class="title is-4 has-text-primary">Acerca del pack</h2>
             <div>{{ pack.description|safe }}</div>
           </div>
         </div>
 
         <div class="column">
-          <div class="block border-bottom">
-            <h2 class="title is-4">Medios de pago</h2>
+          <div class="block border-bottom padding-wrapper">
+            <h2 class="title is-4 has-text-primary">Medios de pago</h2>
             <div class="block">
               <p>
                 Pagá con
@@ -64,7 +64,7 @@
             </div>
           </div>
 
-          <div class="block">
+          <div class="block padding-wrapper">
             <h2 class="title is-4">Cómo funciona</h2>
             <div class="block">
               <h4 class="title is-5 mb-2"><i class="lni lni-cart-full instruction-icon"></i> Compra tu pack</h4>
@@ -81,7 +81,7 @@
           </div>
         </div>
       </div>
-      <div class="block mt-4">
+      <div class="block mt-4 padding-wrapper">
         <h2 class="title is-4">Algunos diseños incluidos</h2>
         <div class="columns is-multiline is-mobile">
           {% for illustration in pack.illustrations.all|slice:':8' %}

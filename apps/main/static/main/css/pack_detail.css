@@ -24,3 +24,7 @@
   vertical-align: middle;
   font-size: larger;
 }
+
+.padding-wrapper {
+  padding: 40px;
+}
