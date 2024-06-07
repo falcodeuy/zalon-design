@@ -82,13 +82,20 @@
         </div>
       </div>
       <div class="block mt-4 padding-wrapper">
-        <h2 class="title is-4">Algunos diseños incluidos</h2>
+        <h2 class="title is-4">Opiniones</h2>
         <div class="columns is-multiline is-mobile">
-          {% for illustration in pack.illustrations.all|slice:':8' %}
-            <div class="column is-one-quarter-desktop is-half-mobile">
-              <figure class="image is-1by1">
-                <img src="{{ illustration.image.url }}" alt="{{ pack.id }}" class="slightly-rotate-hover" style="border-radius: 8px" />
-              </figure>
+          {% for review in pack.reviews.all|slice:':10' %}
+            <div class="media-content">
+              <p>
+                {% for i in review.filled_stars %}
+                  <span class="icon"><i class="lni lni-star-fill score-star"></i></span>
+                {% endfor %}
+                {% for i in review.empty_stars %}
+                  <span class="icon"><i class="lni lni-star-empty score-star"></i></span>
+                {% endfor %}
+              </p>
+              <p class="is-size-4">{{ review.customer.name }}</p>
+              <p class="is-size-6">{{ review.customer.business }}</p>
             </div>
           {% endfor %}
         </div>
