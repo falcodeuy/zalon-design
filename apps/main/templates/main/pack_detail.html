@@ -1,5 +1,9 @@
 {% extends 'base.html' %} {% load static %} {% block extra_head %}
   <link rel="stylesheet" href="{% static 'main/css/pack_detail.css' %}" />
+
+  {% comment %}Dependencies of Splide for the carousel{% endcomment %}
+  <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" />
 {% endblock %} {% block title %}
   Zalon Design - {{ pack.name }}
 {% endblock %}
@@ -8,9 +12,24 @@
     <div class="white-rounded-box container">
       <div class="columns block border-bottom">
         <div class="column is-two-thirds-desktop p-6">
-          <figure class="image is-16by9">
-            <img src="{{ pack.cover.url }}" alt="{{ pack.name }}" style="border-radius: 8px" />
-          </figure>
+          <section class="splide" aria-label="Pack illustrations carousel">
+            <div class="splide__track">
+              <ul class="splide__list">
+                <li class="splide__slide">
+                  <figure class="image is-16by9">
+                    <img src="{{ pack.cover.url }}" alt="{{ pack.name }}" style="border-radius: 8px" />
+                  </figure>
+                </li>
+                {% for illustration in pack.illustrations.all|slice:':10' %}
+                  <li class="splide__slide">
+                    <figure class="image is-16by9">
+                      <img src="{{ illustration.image.url }}" alt="{{ illustration.name }}" style="border-radius: 8px" />
+                    </figure>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </section>
         </div>
         <div class="column p-6">
           <div class="block">
@@ -104,4 +123,12 @@
       </div>
     </div>
   </section>
+
+  <script>
+    new Splide('.splide', {
+      type: 'loop',
+      autoplay: true,
+      interval: 5000,
+    }).mount();
+  </script>
 {% endblock %}
