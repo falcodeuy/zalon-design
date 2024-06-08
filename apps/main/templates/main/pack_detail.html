@@ -7,12 +7,12 @@
   <section class="section base-wrapper">
     <div class="white-rounded-box container">
       <div class="columns block border-bottom">
-        <div class="column is-two-thirds-desktop padding-wrapper">
+        <div class="column is-two-thirds-desktop p-6">
           <figure class="image is-16by9">
             <img src="{{ pack.cover.url }}" alt="{{ pack.name }}" style="border-radius: 8px" />
           </figure>
         </div>
-        <div class="column padding-wrapper">
+        <div class="column p-6">
           <div class="block">
             <h1 class="title has-text-primary"><b style="font-weight: 700">{{ pack.name }}</b></h1>
           </div>
@@ -33,13 +33,13 @@
             <p class="content">{{ pack.subtitle }}</p>
           </div>
           <div class="block">
-            <a href="{% url 'main:order_form' pack.id %}" class="button is-primary is-rounded py-5 px-6"><small>Comprar ahora</small></a>
+            <a href="{% url 'main:order_form' pack.id %}" class="button is-primary is-rounded" style="padding: 24px 48px"><small>Comprar ahora</small></a>
           </div>
         </div>
       </div>
 
       <div class="block columns border-bottom">
-        <div class="column is-two-thirds-desktop border-right padding-wrapper">
+        <div class="column is-two-thirds-desktop border-right p-6 is-mobi">
           <div class="block pb-4">
             <h2 class="title is-4 has-text-primary">Acerca del pack</h2>
             <div>{{ pack.description|safe }}</div>
@@ -47,7 +47,7 @@
         </div>
 
         <div class="column">
-          <div class="block border-bottom padding-wrapper">
+          <div class="block border-bottom p-6">
             <h2 class="title is-4 has-text-primary">Medios de pago</h2>
             <div class="block">
               <p>
@@ -64,41 +64,43 @@
             </div>
           </div>
 
-          <div class="block padding-wrapper">
-            <h2 class="title is-4">Cómo funciona</h2>
+          <div class="block p-6">
+            <h2 class="title is-4 has-text-primary">Cómo funciona</h2>
             <div class="block">
-              <h4 class="title is-5 mb-2"><i class="lni lni-cart-full instruction-icon"></i> Compra tu pack</h4>
+              <h4 class="title is-5 mb-2 has-text-primary"><i class="lni lni-cart-full instruction-icon"></i> Compra tu pack</h4>
               <p>Con la seguridad de comprar con el respaldo de Mercado Pago</p>
             </div>
             <div class="block">
-              <h4 class="title is-5 mb-2"><i class="lni lni-envelope instruction-icon"></i> Abre tu correo</h4>
+              <h4 class="title is-5 mb-2 has-text-primary"><i class="lni lni-envelope instruction-icon"></i> Abre tu correo</h4>
               <p>Recibirás el Pack en tu correo electrónico con los links de acceso a los diseños</p>
             </div>
             <div class="block">
-              <h4 class="title is-5 mb-2"><i class="lni lni-bulb instruction-icon"></i> ¡Crea!</h4>
+              <h4 class="title is-5 mb-2 has-text-primary"><i class="lni lni-bulb instruction-icon"></i> ¡Crea!</h4>
               <p>Puedes publicar las imágenes directamente en tu perfil o editar los diseños</p>
             </div>
           </div>
         </div>
       </div>
-      <div class="block mt-4 padding-wrapper">
-        <h2 class="title is-4">Opiniones</h2>
-        <div class="columns is-multiline is-mobile">
-          {% for review in pack.reviews.all|slice:':10' %}
-            <div class="media-content">
-              <p>
-                {% for i in review.filled_stars %}
-                  <span class="icon"><i class="lni lni-star-fill score-star"></i></span>
-                {% endfor %}
-                {% for i in review.empty_stars %}
-                  <span class="icon"><i class="lni lni-star-empty score-star"></i></span>
-                {% endfor %}
-              </p>
-              <p class="is-size-4">{{ review.customer.name }}</p>
-              <p class="is-size-6">{{ review.customer.business }}</p>
-            </div>
-          {% endfor %}
-        </div>
+      <div class="block mt-4 p-6">
+        <h2 class="title is-4 has-text-primary">Opiniones</h2>
+
+        {% for review in pack.reviews.all|slice:':10' %}
+          <div class="block">
+            <p class="is-size-5">
+              <b>{{ review.customer.name }}</b>
+            </p>
+            <p>
+              {% for i in review.filled_stars %}
+                <span class="icon"><i class="lni lni-star-fill score-star"></i></span>
+              {% endfor %}
+              {% for i in review.empty_stars %}
+                <span class="icon"><i class="lni lni-star-empty score-star"></i></span>
+              {% endfor %}
+            </p>
+
+            <p class="is-size-6">{{ review.review }}</p>
+          </div>
+        {% endfor %}
       </div>
     </div>
   </section>

@@ -72,11 +72,6 @@ class CustomerReviewAdmin(admin.ModelAdmin):
         "pack",
     )
     search_fields = ("customer", "review")
-    readonly_fields = (
-        "customer",
-        "pack",
-        "review",
-    )
 
 
 @admin.register(Customer)
