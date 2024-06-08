@@ -32,13 +32,17 @@ def home(request):
 
     # TODO move this to a service and call it using AJAX to avoid relanting the initial page load
     def get_instagram_followers():
-        url = f"https://www.instagram.com/zalon.app"
-        r = requests.get(url)
-        soup = BeautifulSoup(r.text, "html.parser")
-        data = soup.find_all("meta", attrs={"property": "og:description"})
-        text = data[0].get("content").split()
-        followers = text[0]
-        return followers.replace(",", ".")
+        try:
+            url = f"https://www.instagram.com/zalon.app"
+            r = requests.get(url)
+            soup = BeautifulSoup(r.text, "html.parser")
+            data = soup.find_all("meta", attrs={"property": "og:description"})
+            text = data[0].get("content").split()
+            followers = text[0]
+            return followers.replace(",", ".")
+        except Exception as e:
+            print(e)
+            return "6413"
 
     context = {
         "packs": packs,
