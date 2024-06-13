@@ -322,6 +322,7 @@ BULMA_SETTINGS = {
         "info": "#083766",
         "body-family": "'Inter', sans-serif",
         "background": "#e7e6eb",
+        "text": "#083766",
     },
     "alt_variables": {
         "primary": "#fff",

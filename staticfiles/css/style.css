@@ -2,7 +2,6 @@ body {
   /* TODO we should manage the background color with Bulma theme */
   background-color: #e7e6eb;
   background: #e7e6eb;
-  color: #083766; /* Default text for all texts */
   letter-spacing: 0.5px;
 }
 

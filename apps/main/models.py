@@ -1,3 +1,5 @@
+import math
+
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.core.validators import MinValueValidator, MaxValueValidator
@@ -72,7 +74,9 @@ class Pack(models.Model):
         if reviews:
             total_count = reviews.count()
             total_score = sum([review.score for review in reviews])
-            return int(total_score / total_count)
+            average = total_score / total_count
+            rounded_average = math.ceil(average)
+            return rounded_average
         return 5
 
     @property

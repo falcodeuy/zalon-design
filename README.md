@@ -15,9 +15,9 @@ Con un backoffice para poder cargar packs y tener info de rendimiento.
       text editing
 - **Frontend:**
   - Django Templates
-  - JavaScript (yep just vanilla JS)
-  - CSS for styling (we're not using SASS as we don't want to compile anything
-    by ourselves)
+  - JavaScript
+    - [Splide.js](https://splidejs.com/): for carousels.
+  - CSS for styling
     - [Bulma CSS Framework](https://bulma.io/): for general styling - We use
       Bulma with the help of
       [django-simple-bulma](https://github.com/lemonsaurus/django-simple-bulma)

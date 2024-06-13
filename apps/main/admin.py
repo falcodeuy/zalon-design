@@ -71,10 +71,11 @@ class CustomerReviewAdmin(admin.ModelAdmin):
         "customer",
         "pack",
     )
-    search_fields = ("customer", "review")
-    readonly_fields = (
-        "customer",
-        "pack",
+    search_fields = (
+        "customer__name",
+        "customer__email",
+        "customer__business",
+        "customer__phone",
         "review",
     )
 
@@ -89,7 +90,13 @@ class CustomerAdmin(admin.ModelAdmin):
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     list_display = ("customer", "pack", "is_reviewed", "created_at")
-    search_fields = ("customer", "pack")
+    search_fields = (
+        "customer__name",
+        "customer__email",
+        "customer__business",
+        "customer__phone",
+        "pack__name",
+    )
     ordering = ("customer", "pack", "created_at")
     readonly_fields = ("customer", "pack", "created_at", "is_reviewed")
 
