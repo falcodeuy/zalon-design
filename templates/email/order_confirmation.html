@@ -5,8 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Confirmación de Compra</title>
     <style>
+      :root {
+        --bulma-primary: #00a1ff;
+        --bulma-text: #083766;
+      }
+      .title {
+        color: var(--bulma-text);
+      }
+      
       body {
-        font-family: Arial, sans-serif;
+        color: var(--bulma-text);
+        font-family: Inter, sans-serif;
         font-size: 16px;
         line-height: 1.6;
         margin: 0;
@@ -58,27 +67,6 @@
       .card-content {
         padding: 1.5rem;
       }
-      .card-image {
-        position: relative;
-        display: block;
-      }
-      .image {
-        display: block;
-        position: relative;
-      }
-      .is-16by9 {
-        padding-bottom: 56.25%;
-        height: 0;
-        overflow: hidden;
-      }
-      .is-16by9 img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
       .button {
         display: inline-block;
         font-size: 1rem;
@@ -101,6 +89,9 @@
         border-radius: 290486px;
       }
     </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet" />
   </head>
   <body style="min-height: 100vh">
     <section class="section">
@@ -113,24 +104,35 @@
 
         <div class="block box card">
           <div class="card-content">
-            <p class="title block">Resumen de tu compra</p>
-            <ul>
-              <li>
-                Pack: <b>{{ pack.name }}</b>
-              </li>
-              <li>
-                Precio: <b>${{ pack.price }}</b>
-              </li>
-            </ul>
+            <h2 class="title block">Tu compra:</h2>
+            <div class="box card pack-card">
+              <div class="card-image">
+                <figure class="image">
+                  <img src="https://{{ server_name }}{{ pack.cover.url }}" alt="pack cover" style="width:100%" />
+                </figure>
+              </div>
+              <div class="card-content">
+                <p class="title block">{{ pack.name }}</p>
+                <p class="subtitle block">
+                  <small>{{ pack.subtitle }}</small>
+                </p>
+                <p class="subtitle block">
+                  <b>Precio:</b> ${{ pack.price }}
+                </p>
+
+                <div class="block has-text-centered mt-6">
+                  <a href="https://{{ server_name }}{% url 'main:pack_detail' pack.id %}" class="button is-link is-light is-rounded">Ver página del pack</a>
+                </div>
+              </div>
+            </div>
             <div class="block">
-              <a href="https://{{ server_name }}/pack/{{ pack.id }}/" class="button is-primary is-rounded">Ver página del pack</a>
+              <p>Adjunto encontrarás un archivo PDF con las instrucciones para que puedas comenzar a utilizar tu pack.</p>
+              <p>Si tienes alguna duda no dudes en contactarnos, estamos para ayudarte.</p>
             </div>
           </div>
         </div>
 
-        <p class="has-text-centered">
-          Si tienes alguna duda no dudes en contactarnos,<br />El equipo de Zalon Design
-        </p>
+        <p class="has-text-centered">El equipo de Zalon Design</p>
       </div>
     </section>
   </body>
