@@ -61,7 +61,7 @@
 .reviews-container {
   display: flex;
   width: 100vw;
-  overflow: visible;
+  overflow: hidden;
   position: relative;
   gap: 2em;
   /* Optional: Adds some space between the boxes */
