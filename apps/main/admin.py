@@ -21,7 +21,7 @@ class IllustrationAdmin(admin.ModelAdmin):
 
     def image_tag(self, obj):
         return format_html(
-            '<img src="{}" width="48" height="48" />'.format(obj.image.url)
+            '<img src="{}" width="90" height="50" />'.format(obj.image.url)
         )
 
     image_tag.short_description = "ilustración"
@@ -47,7 +47,7 @@ class PackAdmin(admin.ModelAdmin):
         readonly_fields = ("display_preview",)
 
         def display_preview(self, obj):
-            return format_html('<img src="{}" width="50" height="50" />', obj.image.url)
+            return format_html('<img src="{}" width="90" height="50" />', obj.image.url)
 
         display_preview.short_description = "Preview"
 
@@ -55,7 +55,7 @@ class PackAdmin(admin.ModelAdmin):
 
     def image_tag(self, obj):
         return format_html(
-            '<img src="{}" width="133" height="100" />'.format(obj.cover.url)
+            '<img src="{}" width="160" height="90" />'.format(obj.cover.url)
         )
 
     image_tag.short_description = "cover"
