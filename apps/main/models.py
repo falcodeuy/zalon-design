@@ -25,9 +25,7 @@ class Illustration(models.Model):
     def save(self, *args, **kwargs):
         super(Illustration, self).save(*args, **kwargs)
         img = Image.open(self.image.path)
-        if img.height > 480 or img.width > 480:
-            img.thumbnail((480, 480))
-        img.save(self.image.path, quality=70, optimize=True)
+        img.save(self.image.path, optimize=True)
 
     def __str__(self):
         return self.image.url
