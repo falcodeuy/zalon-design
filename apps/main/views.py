@@ -47,7 +47,8 @@ def home(request):
     context = {
         "packs": packs,
         "customer_reviews": customer_reviews,
-        "orders_count": orders_count,
+        "sold_packs": orders_count
+        + 101,  # 101 is a random number to show some activity for marketing purposes
         "instagram_followers": get_instagram_followers(),
     }
     return render(request, "main/home.html", context)
