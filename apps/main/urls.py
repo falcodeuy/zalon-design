@@ -4,7 +4,7 @@ from . import views
 app_name = "main"
 urlpatterns = [
     path("", views.home, name="home"),
-    path("pack/<int:id>/", views.pack_detail, name="pack_detail"),
+    path("pack/<slug:slug>/", views.pack_detail, name="pack_detail_custom_url"),
     path("pack/order-form/<int:pack_id>", views.order_form, name="order_form"),
     path(
         "customer-review/",

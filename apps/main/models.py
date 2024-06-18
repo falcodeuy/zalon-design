@@ -59,6 +59,9 @@ class Pack(models.Model):
         "PDF de Pack",
         upload_to="instructions",
     )
+    custom_url = models.CharField(
+        "URL personalizada", max_length=200, unique=True, null=True, blank=True
+    )
 
     def __str__(self):
         return self.name

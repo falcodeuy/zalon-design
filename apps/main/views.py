@@ -54,11 +54,17 @@ def home(request):
     return render(request, "main/home.html", context)
 
 
-def pack_detail(request, id):
-    pack = Pack.objects.get(id=id)
-    context = {"pack": pack}
+def pack_detail(request, slug):
+    try:
+        if slug.isnumeric():
+            pack = Pack.objects.get(id=slug)
+        else:
+            pack = Pack.objects.get(custom_url=slug)
+        context = {"pack": pack}
 
-    return render(request, "main/pack_detail.html", context)
+        return render(request, "main/pack_detail.html", context)
+    except Pack.DoesNotExist:
+        return HttpResponseRedirect("/error/")
 
 
 def order_form(request, pack_id):
