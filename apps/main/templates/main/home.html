@@ -21,7 +21,7 @@
               <div class="box card slightly-rotate-hover pack-card">
                 <div class="card-image">
                   <figure class="image is-16by9">
-                    <a href="{% url 'main:pack_detail' pack.id %}"><img src="{{ media_root }}{{ pack.cover.url }}" alt="pack cover" /></a>
+                    <a href="{% url 'main:pack_detail' pack.custom_url|default:pack.id %}"><img src="{{ media_root }}{{ pack.cover.url }}" alt="pack cover" /></a>
                   </figure>
                   <div class="price-tag">${{ pack.price }}</div>
                 </div>
@@ -32,7 +32,7 @@
                   </p>
 
                   <div class="block">
-                    <a href="{% url 'main:pack_detail' pack.id %}" class="button is-link is-light is-rounded">Ver pack</a>
+                    <a href="{% url 'main:pack_detail' pack.custom_url|default:pack.id %}" class="button is-link is-light is-rounded">Ver pack</a>
                   </div>
                 </div>
               </div>
