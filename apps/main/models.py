@@ -2,7 +2,7 @@ import math
 
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator, RegexValidator
 
 from PIL import Image
 from apps.main.utils import send_confirmation_email
@@ -60,7 +60,18 @@ class Pack(models.Model):
         upload_to="instructions",
     )
     custom_url = models.CharField(
-        "URL personalizada", max_length=200, unique=True, null=True, blank=True
+        "URL personalizada",
+        max_length=200,
+        unique=True,
+        null=True,
+        blank=True,
+        validators=[
+            RegexValidator(
+                regex=r"^[\w-]+$",
+                message="URL personalizada debe contener solo letras, números, guiones y guiones bajos.",
+                code="invalid_custom_url",
+            ),
+        ],
     )
 
     def __str__(self):
