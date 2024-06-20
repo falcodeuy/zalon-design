@@ -38,7 +38,7 @@ class PackAdmin(admin.ModelAdmin):
         "image_tag",
     )
     list_filter = ("is_active",)
-    search_fields = ("name", "description")
+    search_fields = ("name", "subtitle")
     ordering = ("name",)
 
     class IllustrationInline(admin.TabularInline):

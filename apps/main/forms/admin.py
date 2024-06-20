@@ -36,6 +36,12 @@ class PackAdminForm(forms.ModelForm):
             "custom_url",
         )
 
+    subtitle = forms.CharField(
+        widget=forms.Textarea(attrs={"rows": 6}),
+        label=_("Subtitle"),
+        required=False,
+    )
+
     illustrations = MultipleFileField(
         widget=MultipleFileInput(),
         label=_("Agregar a galería"),

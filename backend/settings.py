@@ -39,7 +39,10 @@ CONTACT_EMAILS = os.environ.get("CONTACT_EMAILS").split(" ")
 
 CSRF_TRUSTED_ORIGINS = [
     "https://design.zalon.app",
+    "https://zalon.design",
 ]
+
+GOOGLE_ANALYTICS_MEASUREMENT_ID = os.environ.get("GOOGLE_ANALYTICS_MEASUREMENT_ID", "")
 
 # Application definition
 
@@ -82,6 +85,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "apps.main.context_preprocessors.google_analytics",
             ],
         },
     },

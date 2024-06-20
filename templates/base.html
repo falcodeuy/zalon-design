@@ -28,6 +28,18 @@
     {% comment %}Our general styling{% endcomment %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ GOOGLE_ANALYTICS_MEASUREMENT_ID }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      
+      gtag('config', '{{ GOOGLE_ANALYTICS_MEASUREMENT_ID }}');
+    </script>
+
     {% block extra_head %}
 
     {% endblock %}
