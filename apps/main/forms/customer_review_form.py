@@ -1,18 +1,29 @@
 from django import forms
 from django.utils.translation import gettext as _
-
-from apps.main.models import CustomerReview, Customer
+from apps.main.models import CustomerReview, Customer, Pack
 
 
 class CustomerReviewForm(forms.ModelForm):
+    email = forms.EmailField(
+        label=_("Email"),
+        widget=forms.EmailInput(
+            attrs={
+                "placeholder": "Escribe tu email",
+                "required": True,
+                "class": "input",
+            }
+        ),
+        required=True,
+    )
+
     review = forms.CharField(
         label=_("Reseña"),
-        widget=forms.Textarea(  # Use Textarea widget for multiline input
+        widget=forms.Textarea(
             attrs={
                 "placeholder": "Escribe tu reseña",
                 "required": True,
-                "class": "input",
-                "rows": 4,  # Set the number of visible rows for the textarea
+                "class": "textarea",
+                "rows": 4,
             }
         ),
         required=True,
@@ -22,14 +33,26 @@ class CustomerReviewForm(forms.ModelForm):
         model = CustomerReview
         fields = ("pack", "customer")
 
-    def __init__(self, *args, **kwargs):
-        pack_id = kwargs.pop("pack_id")
-        customer_id = kwargs.pop("customer_id")
-        super().__init__(*args, **kwargs)
-        # We autoset packa and customer fields because we are passing them as arguments from the view
-        self.fields["pack"].initial = pack_id
-        self.fields["pack"].widget = forms.HiddenInput()
-        self.fields["pack"].label = ""
-        self.fields["customer"].initial = customer_id
-        self.fields["customer"].widget = forms.HiddenInput()
-        self.fields["customer"].label = ""
+    def save(self, commit=True):
+        # Get the email from the cleaned data
+        email = self.cleaned_data.get("email")
+        pack = self.cleaned_data.get("pack")
+
+        try:
+            customer = Customer.objects.get(email=email)
+            pack = Pack.objects.get(id=pack.id)
+        except Customer.DoesNotExist or Pack.DoesNotExist:
+            return None
+
+        # Create the CustomerReview instance but don't save it to the database yet
+        review = super().save(commit=False)
+
+        # Assign the customer and pack to the review
+        review.customer = customer
+        review.pack = pack
+
+        # Save the review instance if commit is True
+        if commit:
+            review.save()
+
+        return review

@@ -8,7 +8,6 @@
           <h1 class="title">Cuéntanos qué opinas</h1>
           <form method="post">
             {% csrf_token %}
-
             {% for field in form %}
               <div class="field">
                 <label class="label">{{ field.label }}</label>
@@ -18,7 +17,9 @@
                 {% endif %}
               </div>
             {% endfor %}
-
+            <div class="block">
+              <p class="is-6 mb-6">Vamos a usar tu dirección de email para identificarte y saber qué has comprado.</p>
+            </div>
             <div class="field is-grouped mt-6">
               <div class="control">
                 <button class="button is-light is-danger" onclick="window.history.back()">Cancelar</button>
