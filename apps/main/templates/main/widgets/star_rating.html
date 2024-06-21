@@ -1,0 +1,42 @@
+<style>
+  .star-rating {
+    display: flex;
+    align-items: center;
+  }
+  
+  .star-rating .icon {
+    cursor: pointer;
+  }
+  .star-rating .icon:hover {
+    color: #f5b301;
+  }
+  
+  .star-rating .icon.selected {
+    color: #f5b301;
+  }
+</style>
+
+<script defer>
+  document.addEventListener('DOMContentLoaded', function () {
+    const stars = document.querySelectorAll('.star-rating .icon');
+    stars.forEach(star => {
+      star.addEventListener('click', function () {
+        const value = this.getAttribute('data-value');
+        const input = this.parentElement.querySelector('input');
+        input.value = value;
+        stars.forEach(s => s.classList.remove('selected'));
+        for (let i = 0; i < value; i++) {
+          stars[i].classList.add('selected');
+        }
+      });
+    });
+  });
+</script>
+
+<div class="star-rating">
+  {% for i in '12345'|make_list %}
+    <span class="icon mr-1" data-value="{{ i }}"><i class="lni lni-star-fill score-star"></i></span>
+  {% endfor %}
+
+  {{ widget }}
+</div>

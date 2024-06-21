@@ -1,6 +1,13 @@
 from django import forms
+from django.forms.widgets import NumberInput
+from django.utils.safestring import mark_safe
 from django.utils.translation import gettext as _
 from apps.main.models import CustomerReview, Customer, Pack
+from django.forms.renderers import BaseRenderer
+
+
+class StarRatingWidget(NumberInput):
+    template_name = "main/widgets/star_rating.html"
 
 
 class CustomerReviewForm(forms.ModelForm):
@@ -29,12 +36,24 @@ class CustomerReviewForm(forms.ModelForm):
         required=True,
     )
 
+    score = forms.IntegerField(
+        label=_("Puntuación"),
+        widget=StarRatingWidget(),
+        required=True,
+    )
+
     class Meta:
         model = CustomerReview
         fields = ("pack", "customer")
 
+    def __init__(self, *args, **kwargs):
+        super(CustomerReviewForm, self).__init__(*args, **kwargs)
+        self.fields["customer"].widget = forms.HiddenInput()
+        self.fields["customer"].label = ""
+        self.fields["pack"].widget = forms.HiddenInput()
+        self.fields["pack"].label = ""
+
     def save(self, commit=True):
-        # Get the email from the cleaned data
         email = self.cleaned_data.get("email")
         pack = self.cleaned_data.get("pack")
 
@@ -44,14 +63,10 @@ class CustomerReviewForm(forms.ModelForm):
         except Customer.DoesNotExist or Pack.DoesNotExist:
             return None
 
-        # Create the CustomerReview instance but don't save it to the database yet
         review = super().save(commit=False)
-
-        # Assign the customer and pack to the review
         review.customer = customer
         review.pack = pack
 
-        # Save the review instance if commit is True
         if commit:
             review.save()
 
