@@ -41,6 +41,7 @@ services:
     volumes:
       - ./web_nginx.prod.conf:/etc/nginx/templates/default.conf.template
       - ./static:/code/static
+      - ./media:/code/media
       - ./certbot/www:/var/www/certbot/:ro
       - ./certbot/conf/:/etc/nginx/ssl/:ro
     env_file:
