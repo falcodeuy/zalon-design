@@ -53,7 +53,7 @@ class Pack(models.Model):
     strikethrough_price = models.DecimalField(
         "Precio regular", max_digits=6, decimal_places=0, null=True, blank=True
     )
-    is_active = models.BooleanField("Activo", default=True)
+    is_active = models.BooleanField("Activo", default=False)
     cover = models.ImageField("Carátula", upload_to="covers")
     instructions_file = models.FileField(
         "PDF de Pack",
