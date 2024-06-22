@@ -99,6 +99,7 @@ class OrderAdmin(admin.ModelAdmin):
     )
     ordering = ("customer", "pack", "created_at")
     readonly_fields = ("customer", "pack", "created_at", "is_reviewed")
+    list_filter = ("is_reviewed",)
 
     def send_email(self, request, queryset):
         for order in queryset:
