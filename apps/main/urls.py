@@ -18,4 +18,5 @@ urlpatterns = [
     path(
         "contact-confirmation/", views.contact_confirmation, name="contact_confirmation"
     ),
+    path("review-confirmation/", views.review_confirmation, name="review_confirmation"),
 ]

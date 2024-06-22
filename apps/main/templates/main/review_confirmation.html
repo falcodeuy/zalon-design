@@ -1,0 +1,25 @@
+{% extends 'base.html' %} {% load static %}
+{% block title %}
+  Opinión guardada
+{% endblock %}
+{% block content %}
+  <section class="section base-wrapper">
+    <div class="container white-rounded-box">
+      <div class="block">
+        <h1 class="has-text-centered title">Opinión guardada</h1>
+      </div>
+
+      <div class="block has-text-centered">
+        <p>
+          Muchas gracias por tomarte el tiempo de dejar tu opinión. La misma será revisada por nuestro equipo y publicada en la sección de opiniones.
+          <br />
+          Nos ayuda a mejorar y a brindar un mejor servicio.
+        </p>
+      </div>
+
+      <div class="block has-text-centered">
+        <a href="{% url 'main:home' %}" class="button ml-3 is-link is-rounded">Volver al inicio</a>
+      </div>
+    </div>
+  </section>
+{% endblock %}

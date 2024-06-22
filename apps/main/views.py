@@ -129,6 +129,10 @@ def contact_confirmation(request):
     return render(request, "main/contact_confirmation.html", context)
 
 
+def review_confirmation(request):
+    return render(request, "main/review_confirmation.html")
+
+
 def thanks(request):
     order_id = request.GET.get("order")
     order = Order.objects.get(id=order_id)
@@ -146,7 +150,7 @@ def customer_review(request):
         form = CustomerReviewForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect("/success-customer-review/")
+            return HttpResponseRedirect("/review-confirmation/")
     else:
         form = CustomerReviewForm(initial={"pack": pack_id})
     context = {"form": form}
