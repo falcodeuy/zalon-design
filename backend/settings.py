@@ -87,7 +87,8 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "apps.main.context_preprocessors.google_analytics",
-            ],
+                "apps.main.context_preprocessors.django_settings",
+            ]
         },
     },
 ]

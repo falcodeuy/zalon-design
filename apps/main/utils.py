@@ -1,24 +1,40 @@
-from django.core.mail import EmailMultiAlternatives, send_mail
-from django.conf import settings
-from django.template.loader import render_to_string
 import hashlib
 import hmac
-import urllib.parse
 import os
+import urllib.parse
+from importlib import import_module
+
+from django.conf import settings
+from django.core.mail import EmailMultiAlternatives, send_mail
+from django.http import HttpRequest
+from django.template.loader import render_to_string
+
+
+def get_context_data(extra_context=None):
+    """This function is used to manually called our custom context preprocessors without having a request"""
+    context = {}
+
+    dummy_request = HttpRequest()
+    for processor_path in settings.TEMPLATES[0]['OPTIONS']['context_processors']:
+        module_name, func_name = processor_path.rsplit('.', 1)
+        module = import_module(module_name)
+        processor = getattr(module, func_name)
+        context.update(processor(dummy_request))
+
+    if extra_context:
+        context.update(extra_context)
+
+    return context
 
 
 def send_confirmation_email(order):
     subject = f"Gracias por tu compra - #{order.id}"
-    # Render HTML template
-    html_content = render_to_string(
-        "email/order_confirmation.html",
-        {
-            "order": order,
-            "customer": order.customer,
-            "pack": order.pack,
-            "server_name": settings.SERVER_NAME,
-        },
-    )
+    context = get_context_data({
+        "order": order,
+        "customer": order.customer,
+        "pack": order.pack,
+    })
+    html_content = render_to_string("email/order_confirmation.html", context)
     text_content = "Gracias por tu compra"
     email_from = settings.EMAIL_HOST_USER
     recipient_list = [order.customer.email]
@@ -38,7 +54,6 @@ def send_contact_notification_email(contact_msg):
         "email/contact_notification.html",
         {
             "contact_msg": contact_msg,
-            "server_name": settings.SERVER_NAME,
         },
     )
 

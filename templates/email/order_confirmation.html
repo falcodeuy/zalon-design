@@ -97,7 +97,7 @@
     <section class="section">
       <div class="container">
         <div class="block has-text-centered">
-          <img src="https://{{ server_name }}/static/img/zalon_design_logo.png" alt="Zalon Design Logo" width="250" />
+          <img src="https://{{ SERVER_NAME }}/static/img/zalon_design_logo.png" alt="Zalon Design Logo" width="250" />
           <h1 class="title">¡Muchas gracias por tu compra!</h1>
           <h3 class="subtitle">Hola, {{ customer.name }}, gracias por tu compra. Esperamos que le sea de gran valor a tu negocio.</h3>
         </div>
@@ -108,7 +108,7 @@
             <div class="box card pack-card">
               <div class="card-image">
                 <figure class="image">
-                  <img src="https://{{ server_name }}{{ pack.cover.url }}" alt="pack cover" style="width:100%" />
+                  <img src="https://{{ SERVER_NAME }}{{ pack.cover.url }}" alt="pack cover" style="width:100%" />
                 </figure>
               </div>
               <div class="card-content">
@@ -121,7 +121,7 @@
                 </p>
 
                 <div class="block has-text-centered mt-6">
-                  <a href="https://{{ server_name }}{% url 'main:pack_detail' pack.id %}" class="button is-link is-light is-rounded">Ver página del pack</a>
+                  <a href="https://{{ SERVER_NAME }}{% url 'main:pack_detail' pack.id %}" class="button is-link is-light is-rounded">Ver página del pack</a>
                 </div>
               </div>
             </div>
