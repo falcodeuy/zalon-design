@@ -1,3 +1,4 @@
+from typing import Any
 from django import forms
 from django.forms.widgets import NumberInput
 from django.utils.safestring import mark_safe
@@ -50,26 +51,26 @@ class CustomerReviewForm(forms.ModelForm):
         super(CustomerReviewForm, self).__init__(*args, **kwargs)
         self.fields["customer"].widget = forms.HiddenInput()
         self.fields["customer"].label = ""
+        self.fields["customer"].required = False
         self.fields["pack"].widget = forms.HiddenInput()
         self.fields["pack"].label = ""
 
-    def save(self, commit=True):
+    def clean_email(self):
         email = self.cleaned_data.get("email")
-        pack = self.cleaned_data.get("pack")
-
-        print('holaaaaaaaaaaaaaaaaaaaaaaa')
-
         try:
             customer = Customer.objects.get(email=email)
-            pack = Pack.objects.get(id=pack.id)
-        except Customer.DoesNotExist or Pack.DoesNotExist:
-            return None
+        except Customer.DoesNotExist:
+            raise forms.ValidationError(_("No se encontró un cliente con este email"))
+        return email
 
-        review = super().save(commit=False)
-        review.customer = customer
-        review.pack = pack
-
-        if commit:
-            review.save()
-
-        return review
+    def save(self):
+        customer_email = self.cleaned_data.get("email")
+        customer = Customer.objects.get(email=customer_email)
+        pack = self.cleaned_data.get("pack")
+        score = self.cleaned_data.get("score")
+        review = self.cleaned_data.get("review")
+        customer_review = CustomerReview(
+            pack=pack, customer=customer, score=score, review=review
+        )
+        customer_review.save()
+        return customer_review

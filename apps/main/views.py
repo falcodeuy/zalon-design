@@ -141,16 +141,14 @@ def error(request):
 
 
 def customer_review(request):
+    pack_id = request.GET.get("pack_id")
     if request.method == "POST":
         form = CustomerReviewForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect("/success_customer_review/")
-        else:
-            return HttpResponseRedirect("/error_customer_review/")
-
+            return HttpResponseRedirect("/success-customer-review/")
     else:
-        form = CustomerReviewForm()
+        form = CustomerReviewForm(initial={"pack": pack_id})
     context = {"form": form}
     return render(request, "main/customer_review.html", context)
 
