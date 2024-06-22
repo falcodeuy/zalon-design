@@ -103,7 +103,7 @@
       <div class="block mt-4 p-6">
         <div class="block is-flex is-flex-direction-row is-justify-content-space-between">
           <h2 class="title is-4 has-text-primary is-inline">Opiniones</h2>
-          <a href="{% url 'main:customer_review' %}?pack_id={{ pack.id }}" class="button is-primary is-rounded is-right" style="margin-top: -7px;">Cargar opinión</a>
+          <a href="{% url 'main:customer_review' %}?pack_id={{ pack.id }}" class="button is-link is-rounded is-right" style="margin-top: -7px;">Cargar opinión</a>
         </div>
 
         {% for review in pack.reviews.all|slice:':10' %}
