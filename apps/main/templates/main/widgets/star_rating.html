@@ -19,11 +19,13 @@
 <script defer>
   document.addEventListener('DOMContentLoaded', function () {
     const stars = document.querySelectorAll('.star-rating .icon');
+    const scoreInput = document.getElementById('id_score');
+  
     stars.forEach(star => {
       star.addEventListener('click', function () {
         const value = this.getAttribute('data-value');
-        const input = this.parentElement.querySelector('input');
-        input.value = value;
+        scoreInput.value = value;
+  
         stars.forEach(s => s.classList.remove('selected'));
         for (let i = 0; i < value; i++) {
           stars[i].classList.add('selected');
@@ -33,10 +35,14 @@
   });
 </script>
 
-<div class="star-rating">
-  {% for i in '12345'|make_list %}
-    <span class="icon mr-1" data-value="{{ i }}"><i class="lni lni-star-fill score-star"></i></span>
-  {% endfor %}
-
-  {{ widget }}
+<div class="mt-4 mb-4">
+  <div class="star-rating">
+    {% comment %}margin-bottom:0 in label is to counteraffect Bulma's default margin in labels{% endcomment %}
+    <label class="label mr-2" style="margin-bottom: 0">Puntuación:</label>
+    {% for i in '12345'|make_list %}
+      <span class="icon mr-1" data-value="{{ i }}"><i class="lni lni-star-fill score-star"></i></span>
+    {% endfor %}
+  </div>
+  <input type="hidden" id="id_score" name="score" required />
+  <small>Del 1 al 5, ¿qué tan útiles te hemos sido? Indicalo con cantidad de estrellas.</small>
 </div>

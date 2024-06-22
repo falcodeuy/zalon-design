@@ -23,6 +23,12 @@ class CustomerReviewForm(forms.ModelForm):
         required=True,
     )
 
+    score = forms.IntegerField(
+        label="",
+        widget=StarRatingWidget(),
+        required=True,
+    )
+
     review = forms.CharField(
         label=_("Reseña"),
         widget=forms.Textarea(
@@ -33,12 +39,6 @@ class CustomerReviewForm(forms.ModelForm):
                 "rows": 4,
             }
         ),
-        required=True,
-    )
-
-    score = forms.IntegerField(
-        label=_("Puntuación"),
-        widget=StarRatingWidget(),
         required=True,
     )
 
@@ -56,6 +56,8 @@ class CustomerReviewForm(forms.ModelForm):
     def save(self, commit=True):
         email = self.cleaned_data.get("email")
         pack = self.cleaned_data.get("pack")
+
+        print('holaaaaaaaaaaaaaaaaaaaaaaa')
 
         try:
             customer = Customer.objects.get(email=email)

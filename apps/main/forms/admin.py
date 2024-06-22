@@ -38,7 +38,7 @@ class PackAdminForm(forms.ModelForm):
 
     subtitle = forms.CharField(
         widget=forms.Textarea(attrs={"rows": 6}),
-        label=_("Subtitle"),
+        label=_("Descripción corta"),
         required=False,
     )
 
