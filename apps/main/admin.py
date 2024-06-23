@@ -110,6 +110,7 @@ class OrderAdmin(admin.ModelAdmin):
         "created_at",
         "is_reviewed",
         "review_request_sent",
+        "payment",
     )
     list_filter = ("is_reviewed",)
 

@@ -70,5 +70,13 @@ class OrderForm(forms.ModelForm):
                 "phone": phone,
             },
         )
+
+        # If data customer just put is new, we update the customer data. We identify the customer by email
+        if not created:
+            customer.name = name
+            customer.business = business
+            customer.phone = phone
+            customer.save()
+
         order = Order.objects.create(pack=pack, customer=customer)
         return order
