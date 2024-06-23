@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Confirmación de Compra</title>
+    <title>¿Qué te pareció tu compra?</title>
     <style>
       :root {
         --bulma-primary: #00a1ff;
@@ -98,13 +98,11 @@
       <div class="container">
         <div class="block has-text-centered">
           <img src="https://{{ SERVER_NAME }}/static/img/zalon_design_logo.png" alt="Zalon Design Logo" width="250" />
-          <h1 class="title">¡Muchas gracias por tu compra!</h1>
-          <h3 class="subtitle">Hola {{ customer.name }}, gracias por tu compra. Esperamos que le sea de gran valor a tu negocio.</h3>
+          <h1 class="title">¿Qué te pareció tu compra?</h1>
+          <h3 class="subtitle">Hola {{ customer.name }}, hace un tiempo nos compraste este pack de diseños para tu negocio. Nos gustaría saber tu opinión sobre el material.</h3>
         </div>
-
         <div class="block box card">
           <div class="card-content">
-            <h2 class="title block">Tu compra:</h2>
             <div class="box card pack-card">
               <div class="card-image">
                 <figure class="image">
@@ -116,22 +114,16 @@
                 <p class="subtitle block">
                   <small>{{ pack.subtitle }}</small>
                 </p>
-                <p class="subtitle block">
-                  <b>Precio:</b> ${{ pack.price }}
-                </p>
-
                 <div class="block has-text-centered mt-6">
-                  <a href="https://{{ SERVER_NAME }}{% url 'main:pack_detail' pack.id %}" class="button is-link is-light is-rounded">Ver página del pack</a>
+                  <a href="https://{{ SERVER_NAME }}{% url 'main:customer_review' %}?pack_id={{ pack.id }}" class="button is-link is-light is-rounded" style="color: white">Calificar</a>
                 </div>
               </div>
             </div>
             <div class="block">
-              <p>Adjunto encontrarás un archivo PDF con las instrucciones para que puedas comenzar a utilizar tu pack.</p>
               <p>Si tienes alguna duda no dudes en contactarnos, estamos para ayudarte.</p>
             </div>
           </div>
         </div>
-
         <p class="has-text-centered">El equipo de Zalon Design</p>
       </div>
     </section>

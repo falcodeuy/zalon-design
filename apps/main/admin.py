@@ -89,7 +89,13 @@ class CustomerAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ("customer", "pack", "is_reviewed", "created_at")
+    list_display = (
+        "customer",
+        "pack",
+        "is_reviewed",
+        "review_request_sent",
+        "created_at",
+    )
     search_fields = (
         "customer__name",
         "customer__email",
@@ -98,7 +104,13 @@ class OrderAdmin(admin.ModelAdmin):
         "pack__name",
     )
     ordering = ("customer", "pack", "created_at")
-    readonly_fields = ("customer", "pack", "created_at", "is_reviewed")
+    readonly_fields = (
+        "customer",
+        "pack",
+        "created_at",
+        "is_reviewed",
+        "review_request_sent",
+    )
     list_filter = ("is_reviewed",)
 
     def send_email(self, request, queryset):

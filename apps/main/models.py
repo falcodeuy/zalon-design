@@ -158,6 +158,9 @@ class Order(models.Model):
     )
     created_at = models.DateTimeField("Fecha", auto_now_add=True)
     is_reviewed = models.BooleanField("Tiene reseña", default=False)
+    review_request_sent = models.BooleanField(
+        "Solicitud de reseña enviada", default=False
+    )
 
     class Meta:
         verbose_name = _("Orden")

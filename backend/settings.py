@@ -32,7 +32,7 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get("DEBUG", default=False))
-DJANGO_ENV = os.environ.get('DJANGO_ENV', 'local')
+DJANGO_ENV = os.environ.get("DJANGO_ENV", "local")
 
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 
@@ -96,7 +96,7 @@ TEMPLATES = [
 WSGI_APPLICATION = "backend.wsgi.application"
 
 EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
-if DJANGO_ENV == 'local':
+if DJANGO_ENV == "local":
     EMAIL_HOST = os.environ.get("EMAIL_HOST")
     EMAIL_PORT = os.environ.get("EMAIL_PORT")
     EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")

@@ -15,8 +15,8 @@ def get_context_data(extra_context=None):
     context = {}
 
     dummy_request = HttpRequest()
-    for processor_path in settings.TEMPLATES[0]['OPTIONS']['context_processors']:
-        module_name, func_name = processor_path.rsplit('.', 1)
+    for processor_path in settings.TEMPLATES[0]["OPTIONS"]["context_processors"]:
+        module_name, func_name = processor_path.rsplit(".", 1)
         module = import_module(module_name)
         processor = getattr(module, func_name)
         context.update(processor(dummy_request))
@@ -29,11 +29,13 @@ def get_context_data(extra_context=None):
 
 def send_confirmation_email(order):
     subject = f"Gracias por tu compra - #{order.id}"
-    context = get_context_data({
-        "order": order,
-        "customer": order.customer,
-        "pack": order.pack,
-    })
+    context = get_context_data(
+        {
+            "order": order,
+            "customer": order.customer,
+            "pack": order.pack,
+        }
+    )
     html_content = render_to_string("email/order_confirmation.html", context)
     text_content = "Gracias por tu compra"
     email_from = settings.EMAIL_HOST_USER
@@ -45,6 +47,25 @@ def send_confirmation_email(order):
         message.attach_file(order.pack.instructions_file.path)
 
     message.send()
+
+
+def send_customer_review_request_email(order):
+    subject = "¿Te hemos sido de utilidad?"
+    context = get_context_data(
+        {
+            "customer": order.customer,
+            "pack": order.pack,
+        }
+    )
+    html_content = render_to_string("email/customer_review_request.html", context)
+    text_content = "¿Qué te pareció tu compra?"
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = [order.customer.email]
+    message = EmailMultiAlternatives(subject, text_content, email_from, recipient_list)
+    message.attach_alternative(html_content, "text/html")
+    message.send()
+    order.review_request_sent = True
+    order.save()
 
 
 def send_contact_notification_email(contact_msg):

@@ -1,20 +1,16 @@
 from django.core.management.base import BaseCommand
 from django.core.mail import send_mail
+from apps.main.utils import send_customer_review_request_email
+from apps.main.models import Order
+
 
 class Command(BaseCommand):
-    help = 'This file is for scripts or fast test inside the project environment'
+    help = "This file is for scripts or fast test inside the project environment"
 
     def add_arguments(self, parser):
         pass
 
     def handle(self, *args, **kwargs):
-        to_email = 'cr.silper@gmail.com'
-        from_email = 'noreply@zalon.design'
-        subject = 'Test Email from Django using Amazon SES'
-        message = 'This is a test email sent from a Django management command using Amazon SES.'
-
-        try:
-            send_mail(subject, message, from_email, [to_email])
-            self.stdout.write(self.style.SUCCESS(f'Successfully sent test email to {to_email}'))
-        except Exception as e:
-            self.stdout.write(self.style.ERROR(f'Failed to send test email to {to_email}: {e}'))
+        order = Order.objects.first()
+        send_customer_review_request_email(order)
+        self.stdout.write(self.style.SUCCESS("Email sent successfully"))
