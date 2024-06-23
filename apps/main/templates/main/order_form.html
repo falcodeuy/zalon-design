@@ -24,7 +24,7 @@
 
             <div class="field is-grouped mt-6">
               <div class="control">
-                <button class="button is-danger is-light" onclick="window.history.back()">Cancelar</button>
+                <a class="button is-danger is-light" href="{% url 'main:pack_detail' pack_id %}">Cancelar</a>
               </div>
               <div class="control">
                 <button class="button is-primary" type="submit">Ir a pagar</button>
