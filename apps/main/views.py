@@ -100,7 +100,7 @@ def order_form(request, pack_id):
 
     else:
         form = OrderForm(pack_id=pack_id)
-    context = {"form": form}
+    context = {"form": form, "pack_id": pack_id}
     return render(request, "main/order_form.html", context)
 
 
@@ -153,7 +153,7 @@ def customer_review(request):
             return HttpResponseRedirect("/review-confirmation/")
     else:
         form = CustomerReviewForm(initial={"pack": pack_id})
-    context = {"form": form}
+    context = {"form": form, "pack_id": pack_id}
     return render(request, "main/customer_review.html", context)
 
 
