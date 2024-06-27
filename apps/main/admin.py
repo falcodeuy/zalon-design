@@ -126,7 +126,7 @@ class OrderAdmin(admin.ModelAdmin):
 class ContactMsgAdmin(admin.ModelAdmin):
     list_display = ("name", "email", "created_at")
     search_fields = ("name", "email")
-    ordering = ("name", "email", "created_at")
+    ordering = ("-created_at", "name", "email")
     readonly_fields = ("name", "email", "message", "created_at")
 
 
