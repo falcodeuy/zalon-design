@@ -5,6 +5,11 @@
 
 {% block extra_head %}
   <link rel="stylesheet" href="{% static 'main/css/style.css' %}" />
+  <style>
+    .pack-title {
+        font-size: 1.7rem;
+      }
+  </style>
 {% endblock %}
 
 {% block content %}
@@ -26,7 +31,7 @@
                   <div class="price-tag">${{ pack.price }}</div>
                 </div>
                 <div class="card-content">
-                  <p class="title block has-text-primary">{{ pack.name }}</p>
+                  <p class="pack-title title block has-text-primary">{{ pack.name }}</p>
                   <p class="subtitle block has-text-primary">
                     <small>{{ pack.subtitle }}</small>
                   </p>
