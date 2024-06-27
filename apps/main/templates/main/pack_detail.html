@@ -16,13 +16,13 @@
             <div class="splide__track">
               <ul class="splide__list">
                 <li class="splide__slide">
-                  <figure class="image is-16by9">
+                  <figure class="image is-4by3">
                     <img src="{{ pack.cover.url }}" alt="{{ pack.name }}" style="border-radius: 8px" />
                   </figure>
                 </li>
                 {% for illustration in pack.illustrations.all|slice:':10' %}
                   <li class="splide__slide">
-                    <figure class="image is-16by9">
+                    <figure class="image is-4by3">
                       <img src="{{ illustration.image.url }}" alt="{{ illustration.name }}" style="border-radius: 8px" />
                     </figure>
                   </li>
