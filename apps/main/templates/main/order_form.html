@@ -24,11 +24,16 @@
 
             <div class="field is-grouped mt-6">
               <div class="control">
-                <a class="button is-danger is-light" href="{% url 'main:pack_detail' pack_id %}">Cancelar</a>
+              <a class="button is-danger is-light" href="{% url 'main:pack_detail' pack.id %}">Cancelar</a>
               </div>
               <div class="control">
+              {% if pack.price == 0 %}
+                <button class="button is-primary" type="submit">Obtener</button>
+              {% else %}
                 <button class="button is-primary" type="submit">Ir a pagar</button>
+              {% endif %}
               </div>
+            </div>
             </div>
           </form>
         </div>

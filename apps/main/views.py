@@ -15,7 +15,7 @@ from .forms.contact_form import ContactForm
 from .models import Pack, CustomerReview, Order, Payment, ContactMsg
 from .forms.order_form import OrderForm
 from .forms.customer_review_form import CustomerReviewForm
-from .utils import check_mp_signature
+from .utils import check_mp_signature, send_confirmation_email
 
 
 MP_ACCESS_TOKEN = os.environ.get("MP_ACCESS_TOKEN")
@@ -72,7 +72,7 @@ def order_form(request, pack_id):
 
     if request.method == "POST":
         form = OrderForm(request.POST, pack_id=pack_id)
-        if form.is_valid():
+        if form.is_valid() and pack.price > 0:
             order = form.save()
             preference_data = {
                 "back_urls": {
@@ -95,12 +95,16 @@ def order_form(request, pack_id):
             preference = preference_response["response"]
             return HttpResponseRedirect(preference["init_point"])
 
+        elif form.is_valid() and pack.price == 0:
+            order = form.save()
+            send_confirmation_email(order)
+            return HttpResponseRedirect(f"/thanks/?order={order.id}")
         else:
             return HttpResponseRedirect("/error/")
 
     else:
         form = OrderForm(pack_id=pack_id)
-    context = {"form": form, "pack_id": pack_id}
+    context = {"form": form, "pack": pack}
     return render(request, "main/order_form.html", context)
 
 
