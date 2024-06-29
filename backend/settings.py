@@ -353,6 +353,6 @@ CELERY_BROKER_URL = 'redis://redis:6379/0'
 CELERY_BEAT_SCHEDULE = {
     'send-review-email': {
         'task': 'apps.main.tasks.send_review_reminder_emails',
-        'schedule': timedelta(seconds=5),
+        'schedule': crontab(hour=0, minute=1)
     },
 }
