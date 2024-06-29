@@ -1,4 +1,4 @@
-version: '1'
+version: '3.8'
 
 services:
   db:
@@ -24,7 +24,7 @@ services:
       dockerfile: Dockerfile.prod # Use the specific Dockerfile for the build
     command: >
       sh -c "python manage.py migrate && python manage.py collectstatic
-      --no-input && gunicorn backend.wsgi:application -b 0.0.0.0:8000"
+      --no-input && gunicorn backend.wsgi:application -b 0.0.0.0:8000 -w 3"
     volumes:
       - .:/code
     env_file:
@@ -54,6 +54,43 @@ services:
       - web
     networks:
       - web_network
+
+  celery:
+    restart: always
+    build: .
+    command: celery -A backend.celery worker --loglevel=DEBUG -c 1
+    volumes:
+      - .:/code
+    env_file:
+      - .env
+    depends_on:
+      - db
+
+  celery-beat:
+    restart: always
+    build: .
+    command: celery -A backend.celery beat -l info
+    volumes:
+      - .:/code
+    env_file:
+      - .env
+    depends_on:
+      - db
+
+  redis:
+    image: redis
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    env_file:
+      - .env
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
 
   certbot:
     image: certbot/certbot:latest

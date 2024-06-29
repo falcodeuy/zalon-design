@@ -11,13 +11,18 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 import os
+import sys
+from datetime import timedelta
 from pathlib import Path
 
+from celery.schedules import crontab
 from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Add apps folder to the import search path.
+sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 
 # Load environment variables from .env file
 load_dotenv(os.path.join(BASE_DIR, ".env"))
@@ -58,7 +63,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_ckeditor_5",
     "django_simple_bulma",
-    "apps.main",
+    "django_celery_beat",
+    "main",
 ]
 
 MIDDLEWARE = [
@@ -340,4 +346,13 @@ BULMA_SETTINGS = {
         "scheme-main": "#000",
     },
     "output_style": "compressed",
+}
+
+# Celery configuration
+CELERY_BROKER_URL = 'redis://redis:6379/0'
+CELERY_BEAT_SCHEDULE = {
+    'send-review-email': {
+        'task': 'apps.main.tasks.send_review_reminder_emails',
+        'schedule': timedelta(seconds=5),
+    },
 }
