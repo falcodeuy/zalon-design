@@ -56,7 +56,7 @@ services:
   celery:
     restart: always
     build: .
-    command: celery -A backend.celery worker --loglevel=DEBUG -c 1
+    command: celery -A backend.celery worker -l info -c 1
     volumes:
       - .:/code
     env_file:
