@@ -46,7 +46,11 @@
               <br />
               <s class="has-text-grey-light" style="font-size=1.5em">${{ pack.strikethrough_price }}</s>
             {% endif %}
-          <h5 class="subtitle is-2 price has-text-primary">${{ pack.price }}</h5>
+          {% if pack.price == 0 %}
+            <h5 class="subtitle is-2 price has-text-primary">Gratis</h5>
+          {% else %}
+            <h5 class="subtitle is-2 price has-text-primary">${{ pack.price }}</h5>
+          {% endif %}
             
           </div>
           <div class="block">

@@ -28,7 +28,13 @@
                   <figure class="image is-4by3">
                     <a href="{% url 'main:pack_detail' pack.custom_url|default:pack.id %}"><img src="{{ media_root }}{{ pack.cover.url }}" alt="pack cover" /></a>
                   </figure>
-                  <div class="price-tag">${{ pack.price }}</div>
+                  {% if pack.price == 0 %}
+                    <div class="price-tag free-tag">Gratis</div>
+                  {% endif %}
+                  {% if pack.price > 0 %}
+                    <div class="price-tag">${{ pack.price }}</div>
+                  {% endif %}
+                  
                 </div>
                 <div class="card-content">
                   <p class="pack-title title block has-text-primary">{{ pack.name }}</p>

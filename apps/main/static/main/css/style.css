@@ -58,6 +58,16 @@
   top: 17px;
 }
 
+.free-tag {
+  background: linear-gradient(45deg, #56d96e 0%, #9ef1ae 100%);
+  border-radius: 3px 4px 4px 3px;
+  border-left: 1px solid #56d96e;
+}
+
+.free-tag:before {
+  border-right: 19px solid #56d96e;
+}
+
 .reviews-section {
   overflow-x: hidden;
 }
